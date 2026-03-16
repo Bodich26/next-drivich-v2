@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { socials } from "../lib";
+import { socialLinks } from "../constants";
 
 export const SocialsIcon = () => {
   return (
     <ul className="flex justify-between items-center gap-6">
-      {socials.map(({ id, link, icon: Icon }) => {
+      {socialLinks.map(({ id, link, icon: Icon }) => {
         return (
           <li key={id} className="group">
             <Link href={link} target="_blank">
