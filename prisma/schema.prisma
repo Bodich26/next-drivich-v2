@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "/app/generated/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_URL")
+}
+
+enum Role {
+    ADMIN
+    USER
+}
+
+enum EngineType {
+    ENGINE
+    ELECTRO
+}
+
+model User {
+    id        String  @id @default(cuid())
+    firstName String
+    lastName  String?
+    email     String  @unique
+    password  String
+    role      Role    @default(USER)
+
+    accounts Account[]
+    sessions Session[]
+
+    Favorites Favorites?
+    Cart      Cart?
+    Order     Order[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Account {
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([provider, providerAccountId])
+}
+
+model Session {
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Product {
+    id              Int        @id @default(autoincrement())
+    brand           String
+    model           String
+    imageSrc        String
+    power           Int
+    speed           Int
+    color           String[]
+    acceleration    Float
+    engineType      EngineType
+    engineValue     Float?
+    batteryCapacity Float?
+    price           Int
+    discount        Int        @default(0)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    favorites FavoritesOnProducts[]
+    carts     CartOnProducts[]
+    OrderItem OrderItem[]
+}
+
+model Favorites {
+    id       Int                   @id @default(autoincrement())
+    products FavoritesOnProducts[]
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @unique
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Cart {
+    id       Int              @id @default(autoincrement())
+    products CartOnProducts[]
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @unique
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model FavoritesOnProducts {
+    productId   Int
+    favoritesId Int
+
+    product   Product   @relation(fields: [productId], references: [id])
+    favorites Favorites @relation(fields: [favoritesId], references: [id])
+
+    createdAt DateTime @default(now())
+
+    @@id([productId, favoritesId])
+}
+
+model CartOnProducts {
+    productId Int
+    cartId    Int
+
+    product Product @relation(fields: [productId], references: [id])
+    cart    Cart    @relation(fields: [cartId], references: [id])
+
+    quantity Int @default(1)
+
+    createdAt DateTime @default(now())
+
+    @@id([productId, cartId])
+}
+
+model Order {
+    id          Int         @id @default(autoincrement())
+    userId      String
+    firstName   String
+    lastName    String
+    phoneNumber String
+    country     String
+    city        String
+    address     String
+    payment     String
+    status      OrderStatus @default(PENDING)
+    totalPrice  Float
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    completedAt DateTime?
+
+    user       User        @relation(fields: [userId], references: [id])
+    orderItems OrderItem[]
+
+    @@index([status])
+}
+
+model OrderItem {
+    id        Int @id @default(autoincrement())
+    orderId   Int
+    productId Int
+    quantity  Int
+    price     Int
+
+    order   Order   @relation(fields: [orderId], references: [id])
+    product Product @relation(fields: [productId], references: [id])
+}
+
+enum OrderStatus {
+    PENDING
+    PAID
+    SHIPPED
+    COMPLETED
+    CANCELLED
+}
