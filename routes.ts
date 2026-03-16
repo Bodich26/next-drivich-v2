@@ -8,6 +8,9 @@ export const API_ROUTES = {
   BASE_URL: process.env.NEXT_BASE_URL!,
   BASE_API: "/api",
   AUTH: "/auth",
+  CART: "/cart",
+  FAVORITES: "/favorites",
+  ORDERS: "/orders",
 } as const;
 
 /**
@@ -18,4 +21,9 @@ export const API_ROUTES = {
  */
 export const PUBLIC_ROUTES = {
   HOME: "/",
+  CART: "/cart",
+  PRODUCT: "/product",
+  PROFILE: "/profile",
+  AUTH: "/auth",
+  ADMIN: "/admin",
 } as const;
