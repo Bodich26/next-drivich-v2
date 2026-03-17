@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { SessionWrapper } from "@/features/auth";
+import { auth } from "@/../auth";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -13,14 +15,18 @@ export const metadata: Metadata = {
   description: "Your auto store",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en">
-      <body className={`${roboto.variable} antialiased`}>{children}</body>
+      <body className={`${roboto.variable} antialiased`}>
+        <SessionWrapper session={session}>{children}</SessionWrapper>
+      </body>
     </html>
   );
 }
