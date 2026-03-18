@@ -52,6 +52,8 @@ body {
 }
 
 :root {
+  --bg-section: oklch(1 0 0);
+  --logo-fill: #1b1b1c;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
@@ -87,6 +89,8 @@ body {
 }
 
 .dark {
+  --bg-section: oklch(15.999% 0.0042 285.86);
+  --logo-fill: #ffffff;
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
@@ -118,6 +122,13 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+}
+
+.color-logo {
+  color: var(--logo-fill);
+}
+.bg-section {
+  background-color: var(--bg-section);
 }
 
 @layer base {

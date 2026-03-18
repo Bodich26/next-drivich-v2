@@ -30,7 +30,7 @@ export const LoginForm = ({ setActive }: { setActive: () => void }) => {
   } = useLoginForm();
 
   return (
-    <Card className="flex justify-center items-center border border-black/50">
+    <Card className="flex justify-center items-center">
       <CardHeader className="w-full">
         <CardTitle className="text-3xl font-bold">Login Form</CardTitle>
         <CardDescription>Login to your account</CardDescription>
@@ -57,7 +57,6 @@ export const LoginForm = ({ setActive }: { setActive: () => void }) => {
                     id="form-login-email"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your email"
-                    className="border border-black/15 h-[32px] bg-transparent "
                     type="email"
                     disabled={loadingForm}
                     onClick={() => setErrorForm("")}
@@ -84,7 +83,6 @@ export const LoginForm = ({ setActive }: { setActive: () => void }) => {
                     id="form-login-password"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your password"
-                    className="border border-black/15 h-[32px] bg-transparent "
                     type="password"
                     disabled={loadingForm}
                     onClick={() => setErrorForm("")}

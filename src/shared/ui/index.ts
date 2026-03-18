@@ -25,3 +25,4 @@ export * from "./success-form";
 export * from "./sonner";
 export * from "./card";
 export * from "./field";
+export * from "./logo";

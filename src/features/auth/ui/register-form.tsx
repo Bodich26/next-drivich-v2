@@ -30,7 +30,7 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
   } = useRegisterForm();
 
   return (
-    <Card className="flex justify-center items-center border border-black/50">
+    <Card className="flex justify-center items-center ">
       <CardHeader className="w-full">
         <CardTitle className="text-3xl font-bold">Register Form</CardTitle>
         <CardDescription>Register your account</CardDescription>
@@ -57,7 +57,6 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
                     id="form-register-email"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your email"
-                    className="border border-black/15 h-[32px] bg-transparent "
                     type="email"
                     disabled={loadingForm}
                     onClick={() => setErrorForm("")}
@@ -84,7 +83,6 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
                     id="form-register-name"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your first name"
-                    className="border border-black/15 h-[32px] bg-transparent "
                     type="text"
                     disabled={loadingForm}
                     onClick={() => setErrorForm("")}
@@ -111,7 +109,6 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
                     id="form-register-password"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your password"
-                    className="border border-black/15 h-[32px] bg-transparent "
                     type="password"
                     disabled={loadingForm}
                     onClick={() => setErrorForm("")}

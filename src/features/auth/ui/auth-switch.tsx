@@ -8,7 +8,7 @@ export const AuthSwitch = () => {
 
   return (
     <div className="h-full flex items-center justify-center">
-      <div className="w-full max-h-[600px] overflow-y-auto">
+      <div className="w-full max-h-[600px] overflow-y-auto p-1">
         {isActive ? (
           <LoginForm setActive={() => setIsActive(!isActive)} />
         ) : (
