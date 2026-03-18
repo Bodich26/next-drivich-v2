@@ -1,4 +1,5 @@
-import { Container } from "@/shared";
+import { SigninButton } from "@/features/auth";
+import { Container, useCurrentUser } from "@/shared";
 import Image from "next/image";
 import Link from "next/link";
 

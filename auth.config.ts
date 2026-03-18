@@ -3,7 +3,7 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/../prisma/prisma-client";
-import { LoginSchema } from "@/features/auth/model/auth-schema";
+import { loginSchema } from "@/features/auth/model/auth-schema";
 import { Role } from "@prisma/client";
 import { PUBLIC_ROUTES } from "./routes";
 
@@ -11,7 +11,7 @@ export default {
   providers: [
     Credentials({
       async authorize(credentials) {
-        const validatedFields = LoginSchema.safeParse(credentials);
+        const validatedFields = loginSchema.safeParse(credentials);
 
         if (!validatedFields.success) return null;
 

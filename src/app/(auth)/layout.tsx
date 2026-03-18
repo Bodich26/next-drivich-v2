@@ -5,9 +5,9 @@ export default function AuthLayout({
 }>) {
   return (
     <>
-      <header>Auth Header</header>
-      <main>Main Admin {children}</main>
-      <footer>Auth Footer</footer>
+      <header></header>
+      <main>{children}</main>
+      <footer></footer>
     </>
   );
 }
