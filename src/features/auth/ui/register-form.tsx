@@ -1,153 +1,155 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import { Controller } from "react-hook-form";
 import {
   Button,
-  cn,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
   ErrorForm,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
   Input,
   LoaderLine,
   SuccessForm,
 } from "@/shared";
-import { RegisterFormData, RegisterSchema } from "../model/auth-schema";
-import { useRegister } from "../model/use-register";
+import { useRegisterForm } from "../model/use-register-form";
 
-type IProps = {
-  setActive: () => void;
-};
-
-export const RegisterForm = ({ setActive }: IProps) => {
-  const { success, setError, error, loading, handleRegister } = useRegister();
-  const RegisterAccount = useForm<RegisterFormData>({
-    resolver: zodResolver(RegisterSchema),
-    defaultValues: {
-      email: "",
-      firstName: "",
-      password: "",
-    },
-  });
-
-  const RegisterErrorEmail = RegisterAccount.formState.errors.email;
-  const RegisterErrorFirstName = RegisterAccount.formState.errors.firstName;
-  const RegisterErrorPassword = RegisterAccount.formState.errors.password;
+export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
+  const {
+    formRegister,
+    successForm,
+    setErrorForm,
+    errorForm,
+    loadingForm,
+    handleRegister,
+  } = useRegisterForm();
 
   return (
-    <div className="flex justify-center items-center">
-      <Form {...RegisterAccount}>
+    <Card className="flex justify-center items-center border border-black/50">
+      <CardHeader className="w-full">
+        <CardTitle className="text-3xl font-bold">Register Form</CardTitle>
+        <CardDescription>Register your account</CardDescription>
+      </CardHeader>
+      <CardContent>
         <form
           className="w-[308px]"
-          onSubmit={RegisterAccount.handleSubmit(handleRegister)}
+          onSubmit={formRegister.handleSubmit(handleRegister)}
         >
-          <h2 className="text-3xl font-bold mb-6">Register Form</h2>
-          <div className="flex flex-col gap-[20px]">
-            <FormField
+          <FieldGroup>
+            <Controller
               name="email"
-              control={RegisterAccount.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel
-                    className={cn(
-                      "font-medium text-lg",
-                      RegisterErrorEmail && "text-primary",
-                    )}
+              control={formRegister.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel
+                    htmlFor="form-register-email"
+                    className="font-medium text-lg"
                   >
                     Email Address
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="border border-black/15 h-[32px] bg-transparent "
-                      placeholder="enter your email"
-                      type="text"
-                      {...field}
-                      onClick={() => setError("")}
-                      disabled={loading}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-primary text-sm" />
-                </FormItem>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-register-email"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="Enter your email"
+                    className="border border-black/15 h-[32px] bg-transparent "
+                    type="email"
+                    disabled={loadingForm}
+                    onClick={() => setErrorForm("")}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
               )}
             />
-            <FormField
+            <Controller
               name="firstName"
-              control={RegisterAccount.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel
-                    className={cn(
-                      "font-medium text-lg",
-                      RegisterErrorFirstName && "text-primary",
-                    )}
+              control={formRegister.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel
+                    htmlFor="form-register-name"
+                    className="font-medium text-lg"
                   >
                     First Name
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="border border-black/15 h-[32px] bg-transparent "
-                      placeholder="enter your first name"
-                      type="text"
-                      {...field}
-                      disabled={loading}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-primary text-sm" />
-                </FormItem>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-register-name"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="Enter your first name"
+                    className="border border-black/15 h-[32px] bg-transparent "
+                    type="text"
+                    disabled={loadingForm}
+                    onClick={() => setErrorForm("")}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
               )}
             />
-            <FormField
+            <Controller
               name="password"
-              control={RegisterAccount.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel
-                    className={cn(
-                      "font-medium text-lg",
-                      RegisterErrorPassword && "text-primary",
-                    )}
+              control={formRegister.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel
+                    htmlFor="form-register-password"
+                    className="font-medium text-lg"
                   >
                     Password
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="border border-black/15 h-[32px] bg-transparent "
-                      placeholder="+6 characters"
-                      type="password"
-                      {...field}
-                      disabled={loading}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-primary text-sm" />
-                </FormItem>
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    id="form-register-password"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="Enter your password"
+                    className="border border-black/15 h-[32px] bg-transparent "
+                    type="password"
+                    disabled={loadingForm}
+                    onClick={() => setErrorForm("")}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
               )}
             />
-          </div>
-          {loading && <LoaderLine />}
-          <ErrorForm message={error} />
-          <SuccessForm message={success} />
+          </FieldGroup>
+        </form>
+      </CardContent>
+      <CardFooter className="bg-transparent border-0 w-full">
+        <Field orientation="vertical">
+          <ErrorForm message={errorForm} />
+          <SuccessForm message={successForm} />
           <Button
-            className="font-medium text-base w-full px-2 mt-[22px]"
+            className="cursor-pointer font-medium text-base w-full p-4"
             type="submit"
-            disabled={loading}
+            disabled={loadingForm}
           >
             Create
           </Button>
+
+          {loadingForm && <LoaderLine />}
+
           <Button
             type="button"
-            disabled={loading}
+            disabled={loadingForm}
             onClick={setActive}
             variant="link"
-            className="h-[24px] mt-1"
+            className="h-[24px] cursor-pointer"
           >
             Login account
           </Button>
-        </form>
-      </Form>
-    </div>
+        </Field>
+      </CardFooter>
+    </Card>
   );
 };
