@@ -1,36 +1,15 @@
-type LoginRequest = {
+import { ApiResponse } from "@/shared";
+
+type UserDto = {
+  id: string;
   email: string;
-  password: string;
-};
-
-type LoginResponse = {
-  message: string;
-  error?: string;
-  success: boolean;
-  user: {
-    id: string;
-    email: string;
-    firstName: string;
-  };
-  token: string;
-};
-
-type RegisterRequest = {
   firstName: string;
-  email: string;
-  password: string;
 };
 
-type RegisterResponse = {
-  message: string;
-  error?: string;
-  success: boolean;
-  user: {
-    id: string;
-    email: string;
-    firstName: string;
-  };
+type AuthDto = {
+  user: UserDto;
   token: string;
 };
 
-export type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse };
+export type LoginResponse = ApiResponse<AuthDto>;
+export type RegisterResponse = ApiResponse<AuthDto>;
