@@ -37,6 +37,7 @@ export const LoginForm = ({ setActive }: { setActive: () => void }) => {
       </CardHeader>
       <CardContent>
         <form
+          id="form-login"
           className="w-[308px]"
           onSubmit={formLogin.handleSubmit(handleLogin)}
         >
@@ -101,6 +102,7 @@ export const LoginForm = ({ setActive }: { setActive: () => void }) => {
           <ErrorForm message={errorForm} />
           <SuccessForm message={successForm} />
           <Button
+            form="form-login"
             disabled={loadingForm}
             className="cursor-pointer font-medium text-base w-full p-4"
             type="submit"
