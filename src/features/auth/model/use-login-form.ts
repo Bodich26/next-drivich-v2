@@ -1,17 +1,16 @@
 "use client";
-
 import React from "react";
 import { signIn } from "next-auth/react";
 import { loginFormData, loginSchema } from "./auth-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { useLoginMutation } from "../api/auth-api";
+import { loginUserApi } from "../api/auth-api";
+import { ApiError } from "@/shared";
 
 export const useLoginForm = () => {
   const [errorForm, setErrorForm] = React.useState<string | undefined>("");
   const [successForm, setSuccessForm] = React.useState<string | undefined>("");
   const [loadingForm, setLoadingForm] = React.useState<boolean>(false);
-  // const [login] = useLoginMutation();
 
   const formLogin = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
@@ -26,21 +25,22 @@ export const useLoginForm = () => {
     setSuccessForm("");
     setLoadingForm(true);
     try {
-      // const response = await login(values).unwrap();
-      // if (response.success) {
-      //   await signIn("credentials", {
-      //     email: values.email,
-      //     password: values.password,
-      //     redirect: true,
-      //   });
-      //   setSuccess(response.message);
-      // } else {
-      //   setLoading(false);
-      //   setError(response.error);
-      // }
-    } catch (err: unknown | string) {
+      const res = await loginUserApi(values);
+      if (res.success) {
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: true,
+        });
+        setSuccessForm(res.message);
+      } else {
+        setLoadingForm(false);
+        setErrorForm(res.error);
+      }
+    } catch (err) {
+      const error = err as ApiError;
       setLoadingForm(false);
-      setErrorForm(String((err as { message: string }).message));
+      setErrorForm(error.error);
     }
   };
   return {

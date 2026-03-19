@@ -1,33 +1,10 @@
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import {
-//   LoginRequest,
-//   LoginResponse,
-//   RegisterRequest,
-//   RegisterResponse,
-// } from "../model/auth-type";
+import { API_ROUTES } from "@/../routes";
+import { loginFormData } from "../model/auth-schema";
+import { AuthDto } from "../model/auth-type";
+import { apiInstance, ApiResponse } from "@/shared";
 
-// export const authApi = createApi({
-//   reducerPath: "authApi",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: process.env.NEXT_PUBLIC_API_AUTH_URL,
-//     credentials: "include",
-//   }),
-//   endpoints: (builder) => ({
-//     login: builder.mutation<LoginResponse, LoginRequest>({
-//       query: (credentials) => ({
-//         url: "/login",
-//         method: "POST",
-//         body: credentials,
-//       }),
-//     }),
-//     register: builder.mutation<RegisterResponse, RegisterRequest>({
-//       query: (credentials) => ({
-//         url: "/register",
-//         method: "POST",
-//         body: credentials,
-//       }),
-//     }),
-//   }),
-// });
-
-// export const { useLoginMutation, useRegisterMutation } = authApi;
+export async function loginUserApi(formdata: loginFormData) {
+  const LOGIN_URL = `${API_ROUTES.AUTH}${API_ROUTES.AUTH_LOGIN}`;
+  const res = await apiInstance.post<ApiResponse<AuthDto>>(LOGIN_URL, formdata);
+  return res.data;
+}
