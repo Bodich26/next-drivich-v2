@@ -5,3 +5,4 @@ export { LoginForm } from "./ui/login-form";
 export { RegisterForm } from "./ui/register-form";
 export { LogoutButton } from "./ui/logout-button";
 export { SigninButton } from "./ui/signin-button";
+export { loginSchema, registerSchema } from "./model/auth-schema";
