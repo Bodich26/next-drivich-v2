@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/shared";
 import { LucideUser } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -7,7 +8,7 @@ export const SigninButton = () => {
     <Button
       className="font-medium text-base"
       type="submit"
-      size="sm"
+      size={"sm"}
       onClick={() => signIn()}
     >
       <LucideUser />

@@ -37,6 +37,7 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
       </CardHeader>
       <CardContent>
         <form
+          id="form-register"
           className="w-[308px]"
           onSubmit={formRegister.handleSubmit(handleRegister)}
         >
@@ -127,6 +128,7 @@ export const RegisterForm = ({ setActive }: { setActive: () => void }) => {
           <ErrorForm message={errorForm} />
           <SuccessForm message={successForm} />
           <Button
+            form="form-register"
             className="cursor-pointer font-medium text-base w-full p-4"
             type="submit"
             disabled={loadingForm}

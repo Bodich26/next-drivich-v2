@@ -1,16 +1,17 @@
 "use client";
-
 import React from "react";
 import { signIn } from "next-auth/react";
 import { registerFormData, registerSchema } from "./auth-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { PUBLIC_ROUTES } from "@/../routes";
 
 export const useRegisterForm = () => {
   const [errorForm, setErrorForm] = React.useState<string | undefined>("");
   const [successForm, setSuccessForm] = React.useState<string | undefined>("");
   const [loadingForm, setLoadingForm] = React.useState<boolean>(false);
-  //   const [register] = useRegisterMutation();
+  const route = useRouter();
 
   const formRegister = useForm<registerFormData>({
     resolver: zodResolver(registerSchema),
@@ -25,22 +26,29 @@ export const useRegisterForm = () => {
     setErrorForm("");
     setSuccessForm("");
     setLoadingForm(true);
+
     try {
-      //   const response = await register(values).unwrap();
-      //   if (response.success) {
-      //     await signIn("credentials", {
-      //       email: values.email,
-      //       password: values.password,
-      //       redirect: true,
-      //     });
-      //     setSuccess(response.message);
-      //   } else {
-      //     setLoading(false);
-      //     setError(response.error);
-      //   }
-    } catch (err: unknown | string) {
+      const result = await signIn("credentials", {
+        email: values.email,
+        firstName: values.firstName,
+        password: values.password,
+        isRegister: "true",
+        redirect: false,
+      });
+
+      if (result.error) {
+        if (result.error === "CredentialsSignin") {
+          setLoadingForm(false);
+          setErrorForm("Credentials error");
+        }
+      } else {
+        route.push(`${PUBLIC_ROUTES.HOME}`);
+      }
+    } catch (error) {
+      console.log(error);
+
       setLoadingForm(false);
-      setErrorForm(String((err as { message: string }).message));
+      setErrorForm("Internal server error");
     }
   };
   return {
