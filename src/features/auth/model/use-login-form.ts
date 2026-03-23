@@ -4,13 +4,14 @@ import { signIn } from "next-auth/react";
 import { loginFormData, loginSchema } from "./auth-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUserApi } from "../api/auth-api";
-import { ApiError } from "@/shared";
+import { useRouter } from "next/navigation";
+import { PUBLIC_ROUTES } from "@/../routes";
 
 export const useLoginForm = () => {
   const [errorForm, setErrorForm] = React.useState<string | undefined>("");
   const [successForm, setSuccessForm] = React.useState<string | undefined>("");
   const [loadingForm, setLoadingForm] = React.useState<boolean>(false);
+  const route = useRouter();
 
   const formLogin = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
@@ -25,22 +26,26 @@ export const useLoginForm = () => {
     setSuccessForm("");
     setLoadingForm(true);
     try {
-      const res = await loginUserApi(values);
-      if (res.success) {
-        await signIn("credentials", {
-          email: values.email,
-          password: values.password,
-          redirect: true,
-        });
-        setSuccessForm(res.message);
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        isRegister: "false",
+        redirect: false,
+      });
+
+      if (result?.error) {
+        if (result.error === "CredentialsSignin") {
+          setLoadingForm(false);
+          setErrorForm("Credentials error");
+        }
       } else {
-        setLoadingForm(false);
-        setErrorForm(res.error);
+        route.push(`${PUBLIC_ROUTES.HOME}`);
       }
-    } catch (err) {
-      const error = err as ApiError;
+    } catch (error) {
+      console.log(error);
+
       setLoadingForm(false);
-      setErrorForm(error.error);
+      setErrorForm("Internal server error");
     }
   };
   return {
