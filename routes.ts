@@ -13,6 +13,7 @@ export const API_ROUTES = {
   CART: "/cart",
   FAVORITES: "/favorites",
   ORDERS: "/orders",
+  PRODUCTS: "/products",
 } as const;
 
 /**
