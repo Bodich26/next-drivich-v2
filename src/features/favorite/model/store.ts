@@ -1,0 +1,25 @@
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { FavoritesStore } from "./favorite-type";
+
+export const useFavoriteStore = create<FavoritesStore>()(
+  devtools(
+    (set) => ({
+      items: [],
+      isLoading: false,
+      error: null,
+
+      setFavorites: (items) => set({ items, error: null }),
+      addFavorite: (product) =>
+        set((state) => ({ items: [...state.items, product] })),
+      removeFavorite: (productId) =>
+        set((state) => ({
+          items: state.items.filter((item) => item.id !== productId),
+        })),
+      clearFavorites: () => set({ items: [] }),
+      setLoading: (isLoading) => set({ isLoading }),
+      setError: (error) => set({ error }),
+    }),
+    { name: "Favorites Store" },
+  ),
+);
