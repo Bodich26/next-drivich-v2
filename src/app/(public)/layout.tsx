@@ -1,3 +1,5 @@
+import { Header } from "@/widgets/header";
+
 export default function PublicLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,7 @@ export default function PublicLayout({
 }>) {
   return (
     <>
-      <header>Public Header</header>
+      {/* <Header /> */}
       <main>Public Main {children}</main>
       <footer>Public Footer</footer>
     </>

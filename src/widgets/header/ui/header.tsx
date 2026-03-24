@@ -1,5 +1,9 @@
+import { UserDropdown } from "@/entities/user";
 import { SigninButton } from "@/features/auth";
+import { CartBtn } from "@/features/cart";
+import { OpenFavoriteBtn } from "@/features/favorite";
 import { Container, useCurrentUser } from "@/shared";
+import { FavoritesDrawer } from "@/widgets/favorites";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,9 +20,9 @@ export const Header = () => {
             {user ? (
               <>
                 <FavoritesDrawer>
-                  <ButtonOpenFavorites />
+                  <OpenFavoriteBtn />
                 </FavoritesDrawer>
-                <CartButton />
+                <CartBtn />
                 <UserDropdown />
               </>
             ) : (

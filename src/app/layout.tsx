@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { SessionWrapper } from "@/features/auth";
 import { auth } from "@/../auth";
-import { Providers } from "@/shared";
+import { Providers, Toaster } from "@/shared";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -29,6 +29,7 @@ export default async function RootLayout({
         <SessionWrapper session={session}>
           <Providers>{children}</Providers>
         </SessionWrapper>
+        <Toaster />
       </body>
     </html>
   );

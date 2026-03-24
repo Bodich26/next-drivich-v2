@@ -26,3 +26,4 @@ export * from "./sonner";
 export * from "./card";
 export * from "./field";
 export * from "./logo";
+export * from "./badge-sales";
