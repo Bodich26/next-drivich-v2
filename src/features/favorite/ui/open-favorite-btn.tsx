@@ -1,10 +1,10 @@
 import { Button, SheetTrigger } from "@/shared";
 import { Heart } from "lucide-react";
-import { useCountFavorites } from "../model/use-count-favorites";
 import { ClipLoader } from "react-spinners";
+import { useFavorites } from "../model/use-favorite";
 
 export const OpenFavoriteBtn = () => {
-  const { count, isLoading, error } = useCountFavorites();
+  const { isLoading, error, countFavorites } = useFavorites();
   return (
     <SheetTrigger asChild>
       <Button className="font-medium text-base" size="sm">
@@ -14,7 +14,7 @@ export const OpenFavoriteBtn = () => {
         ) : error ? (
           ""
         ) : (
-          count
+          countFavorites
         )}
       </Button>
     </SheetTrigger>

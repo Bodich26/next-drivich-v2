@@ -1,13 +1,9 @@
-import { ApiResponse } from "@/shared";
+import { Product } from "@prisma/client";
 
-export type FavoriteProduct = {
-  id: number;
-  brand: string;
-  model: string;
-  imageSrc: string;
-  price: number;
-  discount?: number;
-};
+export type FavoriteProduct = Pick<
+  Product,
+  "id" | "brand" | "model" | "imageSrc" | "price" | "discount"
+>;
 
 export type FavoritesState = {
   items: FavoriteProduct[];
@@ -23,5 +19,3 @@ export type FavoritesStore = FavoritesState & {
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
 };
-
-export type FavoritesResponse = ApiResponse<FavoriteProduct[]>;

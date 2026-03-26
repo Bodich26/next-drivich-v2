@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { FavoritesStore } from "./favorite-type";
 
-export const useFavoriteStore = create<FavoritesStore>()(
+export const favoriteStore = create<FavoritesStore>()(
   devtools(
     (set) => ({
       items: [],
