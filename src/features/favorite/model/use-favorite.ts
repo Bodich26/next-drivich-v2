@@ -108,12 +108,16 @@ export const useFavorites = () => {
 
     try {
       const res = await getFavoriteProductsApi();
-      store.setFavorites(res.data || []);
       if (!res.success) {
         store.setLoading(false);
         store.setError(res.error);
         store.setFavorites([]);
       }
+
+      console.log(res);
+
+      store.setFavorites(res.data || []);
+      store.setMessage(res.message);
       store.setLoading(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -130,6 +134,7 @@ export const useFavorites = () => {
     favorites: store.items,
     isLoading: store.isLoading,
     error: store.error,
+    message: store.message,
     isFavorite,
     toggleFavorite,
     loadFavorites,

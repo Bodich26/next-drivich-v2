@@ -32,7 +32,7 @@ export const FavoritesDrawer = ({
         {isLoading ? (
           <SkeletonProduct variant="favorites" />
         ) : error ? (
-          <DisplayError error={error} />
+          <DisplayError title="An error has occurred" error={error} />
         ) : (
           <FavoritesList className="px-2" products={favorites} />
         )}
