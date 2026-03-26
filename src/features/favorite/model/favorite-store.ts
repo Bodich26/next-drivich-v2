@@ -8,6 +8,7 @@ export const favoriteStore = create<FavoritesStore>()(
       items: [],
       isLoading: false,
       error: null,
+      message: null,
 
       setFavorites: (items) => set({ items, error: null }),
       addFavorite: (product) =>
@@ -19,7 +20,8 @@ export const favoriteStore = create<FavoritesStore>()(
       clearFavorites: () => set({ items: [] }),
       setLoading: (isLoading) => set({ isLoading }),
       setError: (error) => set({ error }),
+      setMessage: (message) => set({ message }),
     }),
-    { name: "Favorites Store" },
+    { name: "FavoritesStore" },
   ),
 );

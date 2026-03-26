@@ -1,4 +1,4 @@
-import { cn } from "@/shared";
+import { cn, DisplayError } from "@/shared";
 import { FavoriteItem } from "./favorites-item";
 import { FavoriteProduct } from "@/features/favorite/model/favorite-type";
 
@@ -12,10 +12,12 @@ export const FavoritesList = ({ products, className }: ProductListProps) => {
     <div className={cn("flex-1 overflow-y-auto", className)}>
       <div className="flex flex-wrap gap-6 ">
         {!products || products.length === 0 ? (
-          <div className="w-full bg-color-white rounded-md text-center p-4 hover-shadow-block">
-            <h1 className="text-xl font-bold mb-1">No products</h1>
-            <p>Oops, looks like you&apos;re out of groceries!</p>
-          </div>
+          <DisplayError
+            error={
+              " There are no products in your favorites, please add a product."
+            }
+            title={"Favorite is empty"}
+          />
         ) : (
           products.map((product) => {
             return <FavoriteItem key={product.id} product={product} />;

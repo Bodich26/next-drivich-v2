@@ -9,6 +9,7 @@ export type FavoritesState = {
   items: FavoriteProduct[];
   isLoading: boolean;
   error: string | null;
+  message: string | null;
 };
 
 export type FavoritesStore = FavoritesState & {
@@ -18,4 +19,5 @@ export type FavoritesStore = FavoritesState & {
   clearFavorites: () => void;
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
+  setMessage: (message: string | null) => void;
 };

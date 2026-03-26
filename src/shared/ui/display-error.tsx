@@ -1,10 +1,15 @@
+import { cn } from "../lib";
+
 type Props = {
-  error: string | undefined;
+  title: string;
+  error: string;
+  className?: string;
 };
-export const DisplayError = ({ error }: Props) => {
+export const DisplayError = ({ error, title, className }: Props) => {
   return (
-    <div className="flex justify-center items-center bg-color-white px-[6px] py-[1px] w-full h-10 rounded-md">
-      <p className="text-xl text-center font-medium">{error}</p>
+    <div className={cn("text-center w-full", className)}>
+      <span className="text-xl font-bold mb-4">{title}</span>
+      <p className="text-base ">{error}</p>
     </div>
   );
 };
