@@ -1,27 +1,11 @@
 import { CircleX } from "lucide-react";
-import { useRemoveFavorites } from "../model/use-remove-favorites";
-import { useHandleToast } from "@/shared";
-
-type ButtonProps = {
-  productId: number;
-};
-
-export const RemoveFavoriteBtn = ({ productId }: ButtonProps) => {
-  const { removeProductFromFavorites } = useRemoveFavorites();
-  const { showToast } = useHandleToast();
-
-  const handleRemoveProduct = async () => {
-    const { success, error } = await removeProductFromFavorites(productId);
-    if (success) {
-      showToast("remove", "favorites");
-    } else {
-      showToast("error", "favorites", error);
-    }
-  };
+import { useFavorites } from "../model/use-favorite";
+export const RemoveFavoriteBtn = ({ productId }: { productId: number }) => {
+  const { removeFavorite } = useFavorites();
 
   return (
     <CircleX
-      onClick={() => handleRemoveProduct()}
+      onClick={() => removeFavorite(productId)}
       width={19}
       height={19}
       className=" absolute left-[7px] top-[5px] stroke-primary cursor-pointer"

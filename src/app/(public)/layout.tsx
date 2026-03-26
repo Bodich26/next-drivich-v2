@@ -7,7 +7,7 @@ export default function PublicLayout({
 }>) {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <main>Public Main {children}</main>
       <footer>Public Footer</footer>
     </>

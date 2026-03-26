@@ -19,13 +19,7 @@ export const FavoritesDrawer = ({
   children: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { loadFavorites, error, favorites, isLoading } = useFavorites();
-
-  React.useEffect(() => {
-    if (isOpen) {
-      loadFavorites();
-    }
-  }, [isOpen, loadFavorites]);
+  const { error, favorites, isLoading } = useFavorites();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>

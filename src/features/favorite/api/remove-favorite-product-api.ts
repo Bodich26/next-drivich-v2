@@ -1,0 +1,10 @@
+import { apiClient } from "@/shared";
+import { API_ROUTES } from "@/../routes";
+
+export async function removeFavoriteProductApi(productId: number) {
+  const FAVORITES_URL = `${API_ROUTES.FAVORITES}`;
+  const res = await apiClient.delete(FAVORITES_URL, {
+    data: productId,
+  });
+  return res.data;
+}

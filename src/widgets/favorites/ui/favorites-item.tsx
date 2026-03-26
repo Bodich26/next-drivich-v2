@@ -1,10 +1,11 @@
 import { PriceProduct } from "@/entities/product";
-import { AddToCartBtn } from "@/features/cart";
+// import { AddToCartBtn } from "@/features/cart";
 import { RemoveFavoriteBtn } from "@/features/favorite";
 import { FavoriteProduct } from "@/features/favorite/model/favorite-type";
 import { BadgeSales, DecorLine } from "@/shared";
 import Image from "next/image";
 import Link from "next/link";
+import { PUBLIC_ROUTES } from "@/../routes";
 
 export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
   return (
@@ -23,7 +24,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
       <div className=" pt-2 pb-4 pr-4 pl-4 bg-color-minimal-light-white rounded-b-md">
         <Link
           className="product-item-title uppercase"
-          href={`/product/${product.id}`}
+          href={`${PUBLIC_ROUTES.PRODUCT}/${product.id}`}
         >
           {product.model}
         </Link>
@@ -34,7 +35,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
             discount={product.discount}
             view="favorites"
           />
-          <AddToCartBtn variant="icon" productId={product.id} />
+          {/* <AddToCartBtn variant="icon" productId={product.id} /> */}
         </div>
       </div>
     </div>
