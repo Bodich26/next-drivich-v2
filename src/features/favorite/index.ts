@@ -3,3 +3,4 @@ export { OpenFavoriteBtn } from "./ui/open-favorite-btn";
 export { RemoveFavoriteBtn } from "./ui/remove-favorite-btn";
 export { ToggleFavoriteBtn } from "./ui/toggle-favorite-btn";
 export { useFavorites } from "./model/use-favorite";
+export type { FavoriteProduct } from "./model/favorite-type";

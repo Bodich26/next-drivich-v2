@@ -1,3 +1,4 @@
+import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 
 export default function PublicLayout({
@@ -8,8 +9,8 @@ export default function PublicLayout({
   return (
     <>
       <Header />
-      <main>Public Main {children}</main>
-      <footer>Public Footer</footer>
+      <main className="pb-[41px] pt-[71px]">{children}</main>
+      <Footer />
     </>
   );
 }

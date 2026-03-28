@@ -19,7 +19,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="border-b border-[#D2D2D9] bg-color-white mb-4">
+    <header className="border-b border-[#D2D2D9] fixed left-0 right-0">
       <Container>
         <nav className="flex items-center justify-between pt-[8px] pb-[8px]">
           <Logo />
