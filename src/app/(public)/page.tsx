@@ -1,11 +1,4 @@
-import { LogoutButton, SigninButton } from "@/features/auth";
-
+import { CatalogList } from "@/widgets/catalog";
 export default function Home() {
-  return (
-    <>
-      <h1>Главная</h1>
-      <SigninButton />
-      <LogoutButton />
-    </>
-  );
+  return <CatalogList />;
 }
