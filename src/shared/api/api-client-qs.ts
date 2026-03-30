@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import qs from "qs";
 import { API_ROUTES } from "@/../routes";
 import { ApiError } from "../types";
+import { error } from "console";
 
 export const apiClientQs = axios.create({
   baseURL: `${API_ROUTES.BASE_URL}${API_ROUTES.BASE_API}`,
@@ -21,14 +22,21 @@ export const apiClientQs = axios.create({
 });
 
 apiClientQs.interceptors.response.use(
-  (res) => res,
-  (error: AxiosError<ApiError>) => {
-    return Promise.reject(
-      error.response?.data ?? {
-        success: false,
-        error: "Network error",
-        status: 500,
-      },
-    );
+  (res) => {
+    return res;
+  },
+  (error) => {
+    console.error("API Client Response Error:", error);
+    return Promise.reject(error);
+  },
+);
+
+apiClientQs.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    console.error("API Client Request Error:", error);
+    return Promise.reject(error);
   },
 );

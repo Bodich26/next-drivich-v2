@@ -1,6 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { API_ROUTES } from "@/../routes";
-import { ApiError } from "../types";
 
 export const apiClient = axios.create({
   baseURL: `${API_ROUTES.BASE_URL}${API_ROUTES.BASE_API}`,
@@ -9,14 +8,21 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.response.use(
-  (res) => res,
-  (error: AxiosError<ApiError>) => {
-    return Promise.reject(
-      error.response?.data ?? {
-        success: false,
-        error: "Network error",
-        status: 500,
-      },
-    );
+  (res) => {
+    return res;
+  },
+  (error) => {
+    console.error("API Client Response Error:", error);
+    return Promise.reject(error);
+  },
+);
+
+apiClient.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    console.error("API Client Request Error:", error);
+    return Promise.reject(error);
   },
 );

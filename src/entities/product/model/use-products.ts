@@ -1,5 +1,6 @@
 import { productsStore } from "./products-store";
 import { getProductsApi } from "../api/get-products-api";
+import { getErrorMessage } from "@/shared";
 
 export const useProducts = () => {
   const store = productsStore();
@@ -7,24 +8,24 @@ export const useProducts = () => {
   const loadProducts = async () => {
     store.setLoading(true);
     store.setError(null);
+    store.setMessage(null);
+
     try {
       const res = await getProductsApi();
-      if (!res.success) {
-        store.setLoading(false);
-        store.setError(res.error);
+      if (res.success) {
+        store.setProducts(res.data || []);
+        store.setMessage(res.message || "Products loaded successfully");
+      } else {
+        const errorMsg = res.error || "Failed to load products";
+        store.setError(errorMsg);
         store.setProducts([]);
       }
-
-      console.log(res);
-      store.setProducts(res.data || []);
-      store.setMessage(res.message);
-      store.setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.error("Failed to load products:", err);
-      store.setError(err.message || "Failed to load products");
-      store.setLoading(false);
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
+      store.setError(errorMessage);
       store.setProducts([]);
+    } finally {
+      store.setLoading(false);
     }
   };
 
