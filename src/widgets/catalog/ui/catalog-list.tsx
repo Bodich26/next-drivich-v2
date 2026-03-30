@@ -6,13 +6,8 @@ import { CatalogTop } from "./catalog-top";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 
 export const CatalogList = () => {
-  const { loadProducts, isLoading, error, products, productsLength, message } =
+  const { loadProducts, isLoading, error, products, productsLength } =
     useProducts();
-
-  console.log({
-    error,
-    message,
-  });
 
   React.useEffect(() => {
     loadProducts();
@@ -59,11 +54,7 @@ export const CatalogList = () => {
             >
               {products.map((product) => (
                 <ProductItem key={product.id} product={product}>
-                  <ToggleFavoriteBtn
-                    variant="hover"
-                    productId={product.id}
-                    product={product}
-                  />
+                  <ToggleFavoriteBtn variant="hover" productId={product.id} />
                 </ProductItem>
               ))}
             </div>

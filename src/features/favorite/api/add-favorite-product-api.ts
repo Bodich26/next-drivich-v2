@@ -6,7 +6,7 @@ export async function addFavoriteProductApi(productId: number) {
   const FAVORITES_URL = `${API_ROUTES.FAVORITES}`;
   try {
     const res = await apiClient.post(FAVORITES_URL, {
-      data: productId,
+      productId,
     });
     return res.data;
   } catch (error) {

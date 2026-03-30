@@ -6,7 +6,7 @@ export async function removeFavoriteProductApi(productId: number) {
   const FAVORITES_URL = `${API_ROUTES.FAVORITES}`;
   try {
     const res = await apiClient.delete(FAVORITES_URL, {
-      data: productId,
+      data: { productId },
     });
     return res.data;
   } catch (error) {

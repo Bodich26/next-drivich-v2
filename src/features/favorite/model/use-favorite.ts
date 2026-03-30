@@ -1,7 +1,6 @@
 import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
 import { favoriteStore } from "./favorite-store";
 import { getFavoriteProductsApi } from "../api/get-favorite-products-api";
-import { FavoriteProduct } from "./favorite-type";
 import { removeFavoriteProductApi } from "../api/remove-favorite-product-api";
 import { addFavoriteProductApi } from "../api/add-favorite-product-api";
 
@@ -12,25 +11,16 @@ export const useFavorites = () => {
   const isFavorite = (productId: number) =>
     store.items.some((item) => item.id === productId);
 
-  const toggleFavorite = async (product: FavoriteProduct) => {
-    console.log("Toggling favorite for product:", product);
-
+  const toggleFavorite = async (productId: number) => {
     if (!currentUser) {
       showToast("auth", "favorites");
       return;
     }
 
-    const wasFavorite = isFavorite(product.id);
-
-    if (wasFavorite) {
-      store.removeFavorite(product.id);
-    } else {
-      store.addFavorite(product);
-    }
-
+    const wasFavorite = isFavorite(productId);
     try {
       if (wasFavorite) {
-        const res = await removeFavoriteProductApi(product.id);
+        const res = await removeFavoriteProductApi(productId);
         if (!res.success) {
           showToast(
             "error",
@@ -41,7 +31,7 @@ export const useFavorites = () => {
           return;
         }
       } else {
-        const res = await addFavoriteProductApi(product.id);
+        const res = await addFavoriteProductApi(productId);
         if (!res.success) {
           showToast(
             "error",
@@ -52,21 +42,19 @@ export const useFavorites = () => {
           return;
         }
       }
+
       showToast(wasFavorite ? "remove" : "add", "favorites");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      if (wasFavorite) {
-        store.addFavorite(product);
-      } else {
-        store.removeFavorite(product.id);
-      }
+      await loadFavorites();
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
+      if (wasFavorite) loadFavorites();
 
       showToast(
         "error",
         "favorites",
-        err.message || "Failed to change favorites",
+        errorMessage || "Failed to change favorites",
       );
-      store.setError(err.message || "Failed to change favorites");
+      store.setError(errorMessage || "Failed to change favorites");
     }
   };
 
@@ -78,7 +66,6 @@ export const useFavorites = () => {
 
     const productToRemove = store.items.find((item) => item.id === productId);
     if (!productToRemove) return;
-
     store.removeFavorite(productId);
 
     try {
@@ -93,14 +80,14 @@ export const useFavorites = () => {
         return;
       }
       showToast("remove", "favorites");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
       showToast(
         "error",
         "favorites",
-        error.message || "Failed to change favorites",
+        errorMessage || "Failed to change favorites",
       );
-      store.setError(error.message || "Error remove to favorites");
+      store.setError(errorMessage || "Error remove to favorites");
     }
   };
 
