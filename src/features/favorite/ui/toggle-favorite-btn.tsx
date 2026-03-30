@@ -1,22 +1,20 @@
 import { Heart } from "lucide-react";
 import { cn } from "@/shared";
 import { useFavorites } from "../model/use-favorite";
-import { FavoriteProduct } from "../model/favorite-type";
 
 type Props = {
   variant: "hover" | "static";
   productId: number;
-  product: FavoriteProduct;
 };
 
-export const ToggleFavoriteBtn = ({ variant, product, productId }: Props) => {
+export const ToggleFavoriteBtn = ({ variant, productId }: Props) => {
   const { toggleFavorite, isFavorite } = useFavorites();
   const isFav = isFavorite(productId);
 
   if (variant === "hover") {
     return (
       <Heart
-        onClick={() => toggleFavorite(product)}
+        onClick={() => toggleFavorite(productId)}
         width={32}
         height={32}
         className={cn(
@@ -29,7 +27,7 @@ export const ToggleFavoriteBtn = ({ variant, product, productId }: Props) => {
   if (variant === "static") {
     return (
       <Heart
-        onClick={() => toggleFavorite(product)}
+        onClick={() => toggleFavorite(productId)}
         width={32}
         height={32}
         className={cn(
