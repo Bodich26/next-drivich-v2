@@ -65,6 +65,8 @@ export async function POST(req: NextRequest) {
     }
 
     const { productId } = await req.json();
+    console.log(productId);
+
     if (!productId || typeof productId !== "number") {
       return NextResponse.json(
         { error: "Invalid product ID", success: false },

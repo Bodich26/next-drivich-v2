@@ -6,8 +6,13 @@ import { CatalogTop } from "./catalog-top";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 
 export const CatalogList = () => {
-  const { loadProducts, isLoading, error, products, productsLength } =
+  const { loadProducts, isLoading, error, products, productsLength, message } =
     useProducts();
+
+  console.log({
+    error,
+    message,
+  });
 
   React.useEffect(() => {
     loadProducts();
@@ -15,13 +20,29 @@ export const CatalogList = () => {
   }, []);
 
   return (
-    <Container className="flex-1 flex">
-      <section className="flex justify-between gap-8 flex-1 overflow-hidden">
+    <Container>
+      <section className="flex justify-between gap-8 flex-1 relative">
         {/* Левая колонка — фильтры */}
-        <aside className="w-72 flex-shrink-0">
+        <aside
+          className=" border-1 w-75 border-amber-200 rounded-lg p-4 sticky top-4 max-h-[calc(100vh-12.5rem)] 
+    overflow-y-auto"
+        >
           {/* <ProductFilters /> */} Фильтр
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
+          <div className="w-full h-16 bg-blue-900" />
         </aside>
-
         {/* Правая колонка — список товаров */}
         <div className="flex-1 min-w-0">
           <CatalogTop productsLength={productsLength} />

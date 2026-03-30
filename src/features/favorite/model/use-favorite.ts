@@ -1,4 +1,4 @@
-import { showToast, useCurrentUser } from "@/shared";
+import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
 import { favoriteStore } from "./favorite-store";
 import { getFavoriteProductsApi } from "../api/get-favorite-products-api";
 import { FavoriteProduct } from "./favorite-type";
@@ -13,6 +13,8 @@ export const useFavorites = () => {
     store.items.some((item) => item.id === productId);
 
   const toggleFavorite = async (product: FavoriteProduct) => {
+    console.log("Toggling favorite for product:", product);
+
     if (!currentUser) {
       showToast("auth", "favorites");
       return;
@@ -105,26 +107,24 @@ export const useFavorites = () => {
   const loadFavorites = async () => {
     store.setLoading(true);
     store.setError(null);
+    store.setMessage(null);
 
     try {
       const res = await getFavoriteProductsApi();
-      if (!res.success) {
-        store.setLoading(false);
-        store.setError(res.error);
+      if (res.success) {
+        store.setMessage(res.message);
+        store.setFavorites(res.data || []);
+      } else {
+        const errorMsg = res.error || "Failed to load favorites";
+        store.setError(errorMsg);
         store.setFavorites([]);
       }
-
-      console.log(res);
-
-      store.setFavorites(res.data || []);
-      store.setMessage(res.message);
-      store.setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.error("Failed to load favorites:", err);
-      store.setError(err.message || "Failed to load favorites");
-      store.setLoading(false);
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
+      store.setError(errorMessage);
       store.setFavorites([]);
+    } finally {
+      store.setLoading(false);
     }
   };
 
