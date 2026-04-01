@@ -9,8 +9,8 @@ export const CloseFavoriteBtn = ({
 }) => {
   return (
     <Button
-      className={cn("font-medium text-base w-full", className)}
-      size="sm"
+      className={cn("font-medium text-base w-full cursor-pointer", className)}
+      size="lg"
       onClick={onClick}
     >
       Close Favorites

@@ -10,7 +10,7 @@
 //   const { totalPrices } = useCartTotal();
 //   return (
 //     <Link href="/cart">
-//       <Button className=" font-medium text-base" size="sm">
+//       <Button className=" font-medium text-base" size="lg">
 //         {isLoading ? (
 //           <ClipLoader color="hsb(210 40% 98%)" size="17px" />
 //         ) : error ? (

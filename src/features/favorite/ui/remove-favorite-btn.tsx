@@ -8,7 +8,7 @@ export const RemoveFavoriteBtn = ({ productId }: { productId: number }) => {
       onClick={() => removeFavorite(productId)}
       width={19}
       height={19}
-      className=" absolute left-[7px] top-[5px] stroke-primary cursor-pointer"
+      className="z-1 absolute left-[7px] top-[5px] stroke-primary cursor-pointer"
     />
   );
 };
