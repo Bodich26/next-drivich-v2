@@ -8,7 +8,7 @@ export const OpenFavoriteBtn = () => {
   return (
     <SheetTrigger asChild>
       <Button className="font-medium text-base cursor-pointer" size="lg">
-        <Heart />
+        <Heart className="fill-white" />
         {isLoading ? (
           <ClipLoader color="hsb(210 40% 98%)" size="17px" />
         ) : error ? (
