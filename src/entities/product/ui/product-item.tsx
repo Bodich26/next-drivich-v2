@@ -4,6 +4,7 @@ import { BadgeSales, DecorLine } from "@/shared";
 import { PriceProduct } from "./price-product";
 import { ProductInfo } from "./product-info";
 import { Products } from "../model/products-type";
+import { PUBLIC_ROUTES } from "@/../routes";
 
 type Props = {
   product: Products;
@@ -12,32 +13,37 @@ type Props = {
 
 export const ProductItem = ({ product, children }: Props) => {
   return (
-    <div className="group max-w-[300px] hover-shadow-block relative">
-      <div>
+    <div className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card">
+      {/* IMAGE BLOCK */}
+      <div className="relative w-full aspect-[4/2]">
         <BadgeSales discount={product.discount} />
         {children}
         <Image
           src={product.imageSrc}
-          width={300}
-          height={160}
           alt={product.model}
-          className="rounded-t-md"
+          fill
+          className="object-cover"
         />
       </div>
-      <div className="pt-2 pb-4 pr-4 pl-4 bg-color-white rounded-b-md">
+
+      {/* CONTENT */}
+      <div className="flex flex-col flex-1 p-4">
         <Link
-          className="product-item-title uppercase"
-          href={`/product/${product.id}`}
-          passHref
+          className="text-xl font-bold uppercase"
+          href={`${PUBLIC_ROUTES.PRODUCT}/${product.id}`}
         >
           {product.model}
         </Link>
+
         <DecorLine />
-        <div className="flex flex-col gap-1">
+
+        <div className="flex flex-col gap-1 flex-1">
           <ProductInfo label="Power" value={product.power} text="hp" />
+
           {product.speed !== undefined && (
             <ProductInfo label="Top speed" value={product.speed} text="km/h" />
           )}
+
           {product.acceleration !== undefined && (
             <ProductInfo
               label="0-100 km/h"
@@ -45,25 +51,10 @@ export const ProductItem = ({ product, children }: Props) => {
               text="s"
             />
           )}
-          {product.engineType === "ENGINE" &&
-            product.engineValue !== undefined && (
-              <ProductInfo
-                label="Engine"
-                value={product.engineValue}
-                text="L"
-              />
-            )}
-          {product.engineType === "ELECTRO" &&
-            product.batteryCapacity !== undefined && (
-              <ProductInfo
-                label="Battery"
-                value={product.batteryCapacity}
-                text="kw/h"
-              />
-            )}
         </div>
+
+        {/* FOOTER */}
         <div className="flex items-end justify-between mt-4">
-          {/* <ButtonAddToCart variant="button" productId={product.id} /> */}
           <PriceProduct
             price={product.price}
             discount={product.discount}

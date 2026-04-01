@@ -13,7 +13,7 @@ export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
   );
 
   const oldPrice = hasDiscount ? (
-    <span className="text-black/50 line-through">
+    <span className="text-md line-through">
       <PriceFormat price={price} />
     </span>
   ) : null;
@@ -27,9 +27,9 @@ export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
     ),
 
     catalog: (
-      <div className="flex flex-col relative">
-        <span className="text-2xl font-bold">{currentPrice}</span>
-        {oldPrice && <span className="absolute -top-5">{oldPrice}</span>}
+      <div className="flex flex-col gap-0.5 ">
+        <span className="text-xl font-bold">{currentPrice}</span>
+        {oldPrice && <span className="opacity-70">{oldPrice}</span>}
       </div>
     ),
 
@@ -41,12 +41,9 @@ export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
     ),
 
     favorites: (
-      <div>
-        <dl className="flex items-center gap-2">
-          <dt className="text-black-opacity75 text-base">Price: </dt>
-          <dd className="text-base">{currentPrice}</dd>
-        </dl>
-        {oldPrice}
+      <div className="flex flex-col gap-0.5 ">
+        <span className="text-lg font-bold">{currentPrice}</span>
+        {oldPrice && <span className="opacity-70">{oldPrice}</span>}
       </div>
     ),
   };

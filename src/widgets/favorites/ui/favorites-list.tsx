@@ -10,7 +10,7 @@ type ProductListProps = {
 export const FavoritesList = ({ products, className }: ProductListProps) => {
   return (
     <div className={cn("flex-1 overflow-y-auto", className)}>
-      <div className="flex flex-wrap gap-6 ">
+      <div className="flex flex-col gap-6 ">
         {!products || products.length === 0 ? (
           <DisplayError
             error={

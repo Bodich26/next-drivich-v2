@@ -18,25 +18,8 @@ export const CatalogList = () => {
     <Container>
       <section className="flex justify-between gap-8 flex-1 relative">
         {/* Левая колонка — фильтры */}
-        <aside
-          className=" border-1 w-75 border-amber-200 rounded-lg p-4 sticky top-4 max-h-[calc(100vh-12.5rem)] 
-    overflow-y-auto"
-        >
+        <aside className="w-75 border border-border bg-card rounded-md p-4 sticky top-4 max-h-[calc(100vh-12.5rem)] overflow-y-auto">
           {/* <ProductFilters /> */} Фильтр
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
-          <div className="w-full h-16 bg-blue-900" />
         </aside>
         {/* Правая колонка — список товаров */}
         <div className="flex-1 min-w-0">
@@ -49,7 +32,7 @@ export const CatalogList = () => {
           ) : (
             <div
               className={cn(
-                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch",
               )}
             >
               {products.map((product) => (

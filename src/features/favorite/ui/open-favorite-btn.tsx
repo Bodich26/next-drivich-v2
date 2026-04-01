@@ -7,7 +7,7 @@ export const OpenFavoriteBtn = () => {
   const { isLoading, error, countFavorites } = useFavorites();
   return (
     <SheetTrigger asChild>
-      <Button className="font-medium text-base" size="sm">
+      <Button className="font-medium text-base cursor-pointer" size="lg">
         <Heart />
         {isLoading ? (
           <ClipLoader color="hsb(210 40% 98%)" size="17px" />

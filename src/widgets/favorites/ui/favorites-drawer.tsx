@@ -24,7 +24,7 @@ export const FavoritesDrawer = ({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       {children}
-      <SheetContent className="w-[294px] h-full flex flex-col p-4 justify-between">
+      <SheetContent className="w-[294px] h-full flex flex-col p-4 justify-between sheet-bg">
         <SheetHeader>
           <SheetTitle className="font-bold text-2xl">Favorites</SheetTitle>
           <DecorLine />

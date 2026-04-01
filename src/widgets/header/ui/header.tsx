@@ -4,7 +4,7 @@ import { UserDropdown } from "@/entities/user";
 import { SigninButton } from "@/features/auth";
 // import { CartBtn } from "@/features/cart";
 import { OpenFavoriteBtn } from "@/features/favorite";
-import { Container, useCurrentUser } from "@/shared";
+import { Container, DarkMode, useCurrentUser } from "@/shared";
 import { FavoritesDrawer } from "@/widgets/favorites";
 import { Logo } from "@/shared";
 import { useFavorites } from "@/features/favorite";
@@ -19,7 +19,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="border-b border-[#D2D2D9] fixed left-0 right-0 z-10">
+    <header className="border border-border bg-card fixed left-0 right-0 z-10">
       <Container>
         <nav className="flex items-center justify-between pt-[8px] pb-[8px]">
           <Logo />
@@ -35,6 +35,7 @@ export const Header = () => {
             ) : (
               <SigninButton />
             )}
+            <DarkMode />
           </div>
         </nav>
       </Container>
