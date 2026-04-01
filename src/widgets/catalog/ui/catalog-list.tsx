@@ -6,7 +6,7 @@ import { CatalogTop } from "./catalog-top";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 
 export const CatalogList = () => {
-  const { loadProducts, isLoading, error, products, productsLength } =
+  const { loadProducts, error, products, productsLength, status } =
     useProducts();
 
   React.useEffect(() => {
@@ -17,18 +17,17 @@ export const CatalogList = () => {
   return (
     <Container>
       <section className="flex justify-between gap-8 flex-1 relative">
-        {/* Левая колонка — фильтры */}
         <aside className="w-75 border border-border bg-card rounded-md p-4 sticky top-4 max-h-[calc(100vh-12.5rem)] overflow-y-auto">
           {/* <ProductFilters /> */} Фильтр
         </aside>
-        {/* Правая колонка — список товаров */}
         <div className="flex-1 min-w-0">
           <CatalogTop productsLength={productsLength} />
-
-          {isLoading ? (
+          {status === "idle" || status === "loading" ? (
             <SkeletonProduct variant="catalog" />
           ) : error ? (
             <DisplayError error={error} title="Product Catalog" />
+          ) : productsLength === 0 ? (
+            <DisplayError error={"Products is empty"} title="Product Catalog" />
           ) : (
             <div
               className={cn(

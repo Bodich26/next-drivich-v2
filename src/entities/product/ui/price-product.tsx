@@ -27,7 +27,7 @@ export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
     ),
 
     catalog: (
-      <div className="flex flex-col gap-0.5 ">
+      <div className="flex flex-col-reverse ">
         <span className="text-xl font-bold">{currentPrice}</span>
         {oldPrice && <span className="opacity-70">{oldPrice}</span>}
       </div>

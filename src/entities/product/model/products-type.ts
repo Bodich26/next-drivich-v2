@@ -2,6 +2,8 @@ import { Product } from "@prisma/client";
 
 export type Products = Omit<Product, "createdAt" | "updatedAt">;
 
+export type ProductStatusLoading = "idle" | "loading" | "success" | "error";
+
 export type GetProductsFilters = {
   priceMin?: number;
   priceMax?: number;
@@ -27,11 +29,12 @@ export type ProductsState = {
   isLoading: boolean;
   error: string | null;
   message: string | null;
+  status: ProductStatusLoading;
 };
 
 export type ProductsStore = ProductsState & {
   setProducts: (items: Products[]) => void;
-  setLoading: (isLoading: boolean) => void;
+  setStatus: (status: ProductStatusLoading) => void;
   setError: (error: string | null) => void;
   setMessage: (message: string | null) => void;
 };

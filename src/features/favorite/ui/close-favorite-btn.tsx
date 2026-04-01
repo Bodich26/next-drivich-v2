@@ -13,7 +13,7 @@ export const CloseFavoriteBtn = ({
       size="lg"
       onClick={onClick}
     >
-      Close Favorites
+      Close
     </Button>
   );
 };
