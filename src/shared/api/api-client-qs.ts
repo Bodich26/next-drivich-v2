@@ -1,11 +1,9 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import qs from "qs";
 import { API_ROUTES } from "@/../routes";
-import { ApiError } from "../types";
-import { error } from "console";
 
 export const apiClientQs = axios.create({
-  baseURL: `${API_ROUTES.BASE_URL}${API_ROUTES.BASE_API}`,
+  baseURL: `${API_ROUTES.BASE_API}`,
   withCredentials: true,
   timeout: 10000,
   paramsSerializer: (params) =>
