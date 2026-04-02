@@ -19,7 +19,7 @@ export const FavoritesDrawer = ({
   children: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { error, favorites, isLoading } = useFavorites();
+  const { error, favorites, status } = useFavorites();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -29,7 +29,7 @@ export const FavoritesDrawer = ({
           <SheetTitle className="font-bold text-2xl">Favorites</SheetTitle>
           <DecorLine />
         </SheetHeader>
-        {isLoading ? (
+        {status === "idle" || status === "loading" ? (
           <SkeletonProduct variant="favorites" />
         ) : error ? (
           <DisplayError title="An error has occurred" error={error} />

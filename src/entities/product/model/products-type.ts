@@ -1,8 +1,7 @@
+import { loadingStatus } from "@/shared";
 import { Product } from "@prisma/client";
 
 export type Products = Omit<Product, "createdAt" | "updatedAt">;
-
-export type ProductStatusLoading = "idle" | "loading" | "success" | "error";
 
 export type GetProductsFilters = {
   priceMin?: number;
@@ -29,12 +28,12 @@ export type ProductsState = {
   isLoading: boolean;
   error: string | null;
   message: string | null;
-  status: ProductStatusLoading;
+  status: loadingStatus;
 };
 
 export type ProductsStore = ProductsState & {
   setProducts: (items: Products[]) => void;
-  setStatus: (status: ProductStatusLoading) => void;
+  setStatus: (status: loadingStatus) => void;
   setError: (error: string | null) => void;
   setMessage: (message: string | null) => void;
 };
