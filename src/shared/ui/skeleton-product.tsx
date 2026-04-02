@@ -1,92 +1,106 @@
 import { cn } from "../lib";
 import { Skeleton } from "./skeleton";
 
+type Variant = "catalog" | "favorites" | "cart";
+
 type Props = {
-  variant: "catalog" | "favorites" | "cart";
+  variant: Variant;
   className?: string;
 };
+
+const itemsCount: Record<Variant, number> = {
+  catalog: 9,
+  favorites: 9,
+  cart: 5,
+};
+
+const layoutByVariant: Record<Variant, string> = {
+  catalog: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch",
+
+  favorites: "flex flex-col gap-6",
+
+  cart: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch",
+};
+
 export const SkeletonProduct = ({ variant, className }: Props) => {
+  const renderItem = (index: number) => {
+    switch (variant) {
+      case "catalog":
+        return (
+          <div
+            key={index}
+            className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card"
+          >
+            <Skeleton className="h-[141px] rounded-t-md" />
+
+            <div className="pt-2 pb-4 px-4 bg-card">
+              <Skeleton className="w-full h-[32px] mb-[18px] mt-[3px]" />
+
+              <div className="flex flex-col gap-3">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <Skeleton key={i} className="w-full h-[18px]" />
+                ))}
+              </div>
+
+              <div className="flex items-end justify-between mt-4 gap-[30px]">
+                <Skeleton className="w-[180px] h-[37px]" />
+                <Skeleton className="w-[160px] h-[27px]" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "favorites":
+        return (
+          <div key={index} className="w-[271px] h-[228px]">
+            <Skeleton className="h-[135px] rounded-t-md! rounded-b-none" />
+
+            <div className="pt-2 pb-4 px-4 bg-card rounded-b-md! ">
+              <Skeleton className="w-full h-[32px] mb-[18px] mt-[3px]" />
+
+              <div className="flex justify-between mt-[8px] ">
+                <div className="flex gap-3">
+                  <Skeleton className="w-[44px] h-[22px]" />
+                  <Skeleton className="w-[100px] h-[22px]" />
+                </div>
+
+                <Skeleton className="w-[22px] h-[22px]" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "cart":
+        return (
+          <div key={index} className="w-full">
+            <div className="flex justify-between p-[12px] bg-color-minimal-light-white rounded-md">
+              <div className="flex flex-col gap-7">
+                <Skeleton className="w-[35px] h-[19px] bg-color-white" />
+                <Skeleton className="w-[210px] h-[30px] bg-color-white mb-[19px]" />
+              </div>
+
+              <div className="flex gap-6 basis-[65%] justify-end items-center">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="flex flex-col gap-7">
+                    <Skeleton className="w-[65px] h-[19px] bg-color-white" />
+                    <Skeleton className="w-[120px] h-[30px] bg-color-white mb-[19px]" />
+                  </div>
+                ))}
+              </div>
+
+              <Skeleton className="w-[175px] h-[82px] bg-color-white" />
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className={cn("flex-1 overflow-y-auto", className)}>
-      <div className="flex flex-wrap gap-6">
-        {Array.from({ length: 6 }).map((_, index) => {
-          if (variant === "catalog") {
-            return (
-              <div className="max-w-[300px] relative" key={index}>
-                <Skeleton className="w-[300px] h-[148px] rounded-t-md rounded-b-[0px]" />
-                <div className="pt-2 pb-4 pr-4 pl-4 bg-color-white rounded-b-md">
-                  <Skeleton className="w-full h-[32px] rounded-t-md mb-[18px] mt-[3px]" />
-                  <div className="flex flex-col gap-3">
-                    {Array.from({ length: 4 }).map((_, index) => {
-                      return (
-                        <Skeleton
-                          key={index}
-                          className="w-full h-[18px] rounded-t-md"
-                        />
-                      );
-                    })}
-                  </div>
-                  <div className="flex items-end justify-between mt-4 gap-[30px]">
-                    <Skeleton className="w-[180px] h-[37px] rounded-t-md" />
-                    <Skeleton className="w-[160px] h-[27px] rounded-t-md" />
-                  </div>
-                </div>
-              </div>
-            );
-          }
-          if (variant === "favorites") {
-            return (
-              <div className="w-[245px]" key={index}>
-                <Skeleton className="w-[245px] h-[130px] rounded-t-md rounded-b-[0px] bg-color-white" />
-                <div className=" pt-2 pb-4 pr-4 pl-4 bg-color-minimal-light-white rounded-b-md">
-                  <Skeleton className="w-full h-[32px] rounded-t-md mb-[18px] mt-[3px] bg-color-white" />
-                  <div className="flex flex-row justify-between mt-[8px]">
-                    <div className="flex justify-between gap-3">
-                      <Skeleton className="w-[44px] h-[22px] rounded-t-md bg-color-white" />
-                      <Skeleton className="w-[100px] h-[22px] rounded-t-md bg-color-white" />
-                    </div>
-                    <Skeleton className="w-[22px] h-[22px] rounded-t-md bg-color-white" />
-                  </div>
-                </div>
-              </div>
-            );
-          }
-        })}
-        {Array.from({ length: 5 }).map((_, index) => {
-          if (variant === "cart") {
-            return (
-              <div className="w-full" key={index}>
-                <div className="w-full flex justify-between p-[12px] bg-color-minimal-light-white rounded-md">
-                  <div className="flex justify-between items-start flex-col gap-7">
-                    <Skeleton className="w-[35px] h-[19px] rounded-t-md bg-color-white" />
-                    <Skeleton className="w-[210px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
-                  </div>
-                  <div className="flex gap-6 basis-[65%] justify-end items-center">
-                    <div className="flex justify-between items-start flex-col gap-7">
-                      <Skeleton className="w-[65px] h-[19px] rounded-t-md bg-color-white" />
-                      <Skeleton className="w-[120px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
-                    </div>
-                    <div className="flex justify-between items-start flex-col gap-7">
-                      <Skeleton className="w-[65px] h-[19px] rounded-t-md bg-color-white" />
-                      <Skeleton className="w-[120px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
-                    </div>
-                    <div className="flex justify-between items-start flex-col gap-7">
-                      <Skeleton className="w-[100px] h-[19px] rounded-t-md bg-color-white" />
-                      <Skeleton className="w-[115px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
-                    </div>
-                    <div className="flex justify-between items-start flex-col gap-7">
-                      <Skeleton className="w-[60px] h-[19px] rounded-t-md bg-color-white" />
-                      <Skeleton className="w-[40px] h-[30px] rounded-t-md bg-color-white mb-[19px]" />
-                    </div>
-                  </div>
-                  <div>
-                    <Skeleton className="w-[175px] h-[82px] rounded-t-md bg-color-white" />
-                  </div>
-                </div>
-              </div>
-            );
-          }
-        })}
+      <div className={layoutByVariant[variant]}>
+        {Array.from({ length: itemsCount[variant] }).map((_, index) =>
+          renderItem(index),
+        )}
       </div>
     </div>
   );
