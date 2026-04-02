@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_ROUTES } from "@/../routes";
 
 export const apiClient = axios.create({
-  baseURL: `${API_ROUTES.BASE_URL}${API_ROUTES.BASE_API}`,
+  baseURL: `${API_ROUTES.BASE_API}`,
   withCredentials: true,
   timeout: 10000,
 });
