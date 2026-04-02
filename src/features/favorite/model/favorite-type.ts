@@ -1,3 +1,4 @@
+import { loadingStatus } from "@/shared";
 import { Product } from "@prisma/client";
 
 export type FavoriteProduct = Pick<
@@ -10,6 +11,7 @@ export type FavoritesState = {
   isLoading: boolean;
   error: string | null;
   message: string | null;
+  status: loadingStatus;
 };
 
 export type FavoritesStore = FavoritesState & {
@@ -17,7 +19,7 @@ export type FavoritesStore = FavoritesState & {
   addFavorite: (product: FavoriteProduct) => void;
   removeFavorite: (productId: number) => void;
   clearFavorites: () => void;
-  setLoading: (isLoading: boolean) => void;
+  setStatus: (status: loadingStatus) => void;
   setError: (error: string | null) => void;
   setMessage: (message: string | null) => void;
 };

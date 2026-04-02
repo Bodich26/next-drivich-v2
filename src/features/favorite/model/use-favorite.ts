@@ -92,26 +92,30 @@ export const useFavorites = () => {
   };
 
   const loadFavorites = async () => {
-    store.setLoading(true);
-    store.setError(null);
-    store.setMessage(null);
+    store.setStatus("loading");
 
     try {
       const res = await getFavoriteProductsApi();
       if (res.success) {
-        store.setMessage(res.message);
-        store.setFavorites(res.data || []);
+        favoriteStore.setState({
+          items: res.data || [],
+          status: "success",
+          error: null,
+          message: res.message || "Favorites loaded successfully",
+        });
       } else {
-        const errorMsg = res.error || "Failed to load favorites";
-        store.setError(errorMsg);
-        store.setFavorites([]);
+        favoriteStore.setState({
+          items: [],
+          status: "error",
+          error: res.error || "Failed to load favorites",
+        });
       }
     } catch (err: unknown) {
-      const errorMessage = getErrorMessage(err);
-      store.setError(errorMessage);
-      store.setFavorites([]);
-    } finally {
-      store.setLoading(false);
+      favoriteStore.setState({
+        items: [],
+        status: "error",
+        error: getErrorMessage(err),
+      });
     }
   };
 
@@ -119,7 +123,7 @@ export const useFavorites = () => {
 
   return {
     favorites: store.items,
-    isLoading: store.isLoading,
+    status: store.status,
     error: store.error,
     message: store.message,
     isFavorite,

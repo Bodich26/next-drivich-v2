@@ -10,9 +10,9 @@ export const productsStore = create<ProductsStore>()(
       message: null,
       status: "idle",
 
-      setProducts: (items) => set({ items, status: "success", error: null }),
+      setProducts: (items) => set({ items }),
       setStatus: (status) => set({ status }),
-      setError: (error) => set({ status: "error", error }),
+      setError: (error) => set({ error }),
       setMessage: (message) => set({ message }),
     }),
     { name: "ProductsStore" },
