@@ -19,7 +19,7 @@ export const FavoritesDrawer = ({
   children: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const { error, favorites, status } = useFavorites();
+  const { error, favorites, status, countFavorites } = useFavorites();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -33,6 +33,13 @@ export const FavoritesDrawer = ({
           <SkeletonProduct variant="favorites" />
         ) : error ? (
           <DisplayError title="An error has occurred" error={error} />
+        ) : countFavorites === 0 ? (
+          <DisplayError
+            title="Favorite is empty"
+            error={
+              "There are no products in your favorites, please add a product."
+            }
+          />
         ) : (
           <FavoritesList className="px-2" products={favorites} />
         )}
