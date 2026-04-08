@@ -4,6 +4,7 @@ import { cn, Container, DisplayError, SkeletonProduct } from "@/shared";
 import { ProductItem, useProducts } from "@/entities/product";
 import { CatalogTop } from "./catalog-top";
 import { ToggleFavoriteBtn } from "@/features/favorite";
+import { FiltersList } from "@/features/filters";
 
 export const CatalogList = () => {
   const { loadProducts, error, products, productsLength, status } =
@@ -17,9 +18,7 @@ export const CatalogList = () => {
   return (
     <Container>
       <section className="flex justify-between gap-8 flex-1 relative">
-        <aside className="w-75 border border-border bg-card rounded-md p-4 sticky top-4 max-h-[calc(100vh-12.5rem)] overflow-y-auto">
-          {/* <ProductFilters /> */} Фильтр
-        </aside>
+        <FiltersList />
         <div className="flex-1 min-w-0">
           <CatalogTop productsLength={productsLength} />
           {status === "idle" || status === "loading" ? (
