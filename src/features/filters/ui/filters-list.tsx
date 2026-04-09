@@ -1,6 +1,6 @@
 import { cn, Input } from "@/shared";
 import { useFilters } from "../model/use-filters";
-import { CheckboxGroup } from "./checkbox-group";
+// import { CheckboxGroup } from "./checkbox-group";
 import { RangeSlider } from "./range-slider";
 import { CircleX } from "lucide-react";
 
