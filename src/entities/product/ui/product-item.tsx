@@ -29,7 +29,7 @@ export const ProductItem = ({ product, children }: Props) => {
       {/* CONTENT */}
       <div className="flex flex-col flex-1 p-4">
         <Link
-          className="text-xl font-bold uppercase"
+          className="text-xl font-bold uppercase mb-1"
           href={`${PUBLIC_ROUTES.PRODUCT}/${product.id}`}
         >
           {product.model}
@@ -37,7 +37,7 @@ export const ProductItem = ({ product, children }: Props) => {
 
         <DecorLine />
 
-        <div className="flex flex-col gap-1 flex-1">
+        <div className="flex flex-col gap-1 flex-1 mt-1">
           <ProductInfo label="Power" value={product.power} text="hp" />
 
           {product.speed !== undefined && (

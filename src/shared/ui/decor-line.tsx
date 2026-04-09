@@ -1,5 +1,16 @@
-export const DecorLine = () => {
+import { cn } from "../lib";
+
+type Props = {
+  className?: string;
+};
+
+export const DecorLine = ({ className }: Props) => {
   return (
-    <span className="block max-w-[100%] h-[1px] rounded-md bg-border mt-1 mb-1" />
+    <span
+      className={cn(
+        "block max-w-[100%] h-[1px] rounded-md bg-accent",
+        className,
+      )}
+    />
   );
 };

@@ -1,12 +1,15 @@
-import { cn, Input } from "@/shared";
-import { useFilters } from "../model/use-filters";
+import { cn, DecorLine, Field, FieldLabel, Input } from "@/shared";
+import { useChangeFilters } from "../model/use-change-filters";
+import { useControlFilters } from "../model/use-control-filter";
 // import { CheckboxGroup } from "./checkbox-group";
 import { RangeSlider } from "./range-slider";
-import { CircleX } from "lucide-react";
+import { ResetFiltersBtn } from "./reset-filters-btn";
 
 export const FiltersList = () => {
-  const { handleSearchModel, toggle, toggleFilters, searchModel } =
-    useFilters();
+  const { toggle, toggleFilters } = useControlFilters();
+  const { handleSearchModel, searchModel, priceRange, handlePriceRangeChange } =
+    useChangeFilters();
+
   return (
     <>
       {toggle && (
@@ -37,35 +40,38 @@ export const FiltersList = () => {
         )}
       >
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Filter by</h1>
-          <div
-            className="flex items-center gap-1 text-primary cursor-pointer"
-            onClick={() => window.location.reload()}
-          >
-            <CircleX width={17} height={17} className="stroke-primary" />
-            reset All
-          </div>
+          <h1 className="text-2xl font-bold">Product Filtration</h1>
+          <ResetFiltersBtn />
         </div>
-        <div className="flex flex-col gap-3">
-          <span className=" font-medium text-lg">Search</span>
-          <Input
-            className="border border-black/15 h-[32px] bg-transparent"
-            placeholder="enter the car name"
-            type="search"
-            value={searchModel}
-            onChange={handleSearchModel}
-          />
+        <DecorLine className="my-3" />
+        <div className="flex flex-col gap-5">
+          <Field>
+            <FieldLabel htmlFor="searchModel" className="font-medium text-lg">
+              Search model
+            </FieldLabel>
+            <Input
+              id="searchModel"
+              className="border  bg-transparent"
+              placeholder="Enter a car model"
+              type="search"
+              value={searchModel}
+              onChange={handleSearchModel}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="priceRange" className="font-medium text-lg">
+              Price range
+            </FieldLabel>
+            <RangeSlider
+              min={0}
+              max={900000}
+              step={1000}
+              value={priceRange}
+              onValueChange={handlePriceRangeChange}
+            />
+          </Field>
         </div>
-        {/* <div className="flex flex-col gap-3">
-          <span className=" font-medium text-lg">Price</span>
-          <RangeSlider
-            min={0}
-            max={900000}
-            step={1000}
-            value={priceRange}
-            onValueChange={setPriceRange}
-          />
-        </div> */}
+
         {/* <CheckboxGroup
           title="Engine type"
           limit={2}
