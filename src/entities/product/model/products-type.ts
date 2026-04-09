@@ -3,12 +3,12 @@ import { Product } from "@prisma/client";
 
 export type Products = Omit<Product, "createdAt" | "updatedAt">;
 
-export type GetProductsFilters = {
+export type ProductsWithFilters = {
   priceMin?: number;
   priceMax?: number;
   engine?: boolean;
   electro?: boolean;
-  model?: string;
+  searchModel?: string;
   powerRanges?: { min: number; max: number }[];
   sort?: "cheap" | "expensive" | "newest";
 };

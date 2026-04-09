@@ -1,19 +1,13 @@
 "use client";
-import React from "react";
 import { cn, Container, DisplayError, SkeletonProduct } from "@/shared";
-import { ProductItem, useProducts } from "@/entities/product";
+import { ProductItem } from "@/entities/product";
 import { CatalogTop } from "./catalog-top";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 import { FiltersList } from "@/features/filters";
+import { useCatalog } from "../model/use-catalog";
 
 export const CatalogList = () => {
-  const { loadProducts, error, products, productsLength, status } =
-    useProducts();
-
-  React.useEffect(() => {
-    loadProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { products, productsLength, error, status } = useCatalog();
 
   return (
     <Container>
@@ -26,7 +20,10 @@ export const CatalogList = () => {
           ) : error ? (
             <DisplayError error={error} title="Product Catalog" />
           ) : productsLength === 0 ? (
-            <DisplayError error={"Products is empty"} title="Product Catalog" />
+            <DisplayError
+              error={"Such products do not exist"}
+              title="Product Catalog"
+            />
           ) : (
             <div
               className={cn(
