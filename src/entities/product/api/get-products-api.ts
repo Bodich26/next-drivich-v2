@@ -1,9 +1,12 @@
 import { apiClientQs } from "@/shared";
 import { API_ROUTES } from "@/../routes";
-import { GetProductsFilters } from "../model/products-type";
+import { ProductsWithFilters } from "../model/products-type";
 import axios from "axios";
 
-export async function getProductsApi(filters: GetProductsFilters = {}) {
+export async function getProductsApi(
+  filters: ProductsWithFilters = {},
+  signal?: AbortSignal,
+) {
   const PRODUCTS_URL = `${API_ROUTES.PRODUCTS}`;
   try {
     const res = await apiClientQs.get(PRODUCTS_URL, {
@@ -14,7 +17,7 @@ export async function getProductsApi(filters: GetProductsFilters = {}) {
         },
         engine: filters.engine ? "true" : undefined,
         electro: filters.electro ? "true" : undefined,
-        model: filters.model,
+        searchModel: filters.searchModel,
         powerRanges: filters.powerRanges
           ? JSON.stringify(filters.powerRanges)
           : undefined,
@@ -25,9 +28,14 @@ export async function getProductsApi(filters: GetProductsFilters = {}) {
               ? "desc"
               : undefined,
       },
+      signal,
     });
     return res.data;
   } catch (error) {
+    if (axios.isCancel(error)) {
+      return null;
+    }
+
     if (axios.isAxiosError(error)) {
       throw new Error(error.response?.data?.error || "Server error occurred");
     }

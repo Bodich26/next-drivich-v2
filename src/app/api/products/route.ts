@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     const priceMax = searchParams.get("price[lte]");
     const engine = searchParams.get("engine");
     const electro = searchParams.get("electro");
-    const model = searchParams.get("model");
+    const model = searchParams.get("searchModel");
     const powerRangesStr = searchParams.get("powerRanges");
     const sort = searchParams.get("sort");
 
@@ -72,10 +72,10 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    if (!productsList || productsList.length === 0) {
+    if (!productsList) {
       return NextResponse.json(
         { error: "Products not found", success: false },
-        { status: 404 },
+        { status: 401 },
       );
     }
 

@@ -6,7 +6,7 @@ export const ToggleFilterBtn = () => {
   const { toggleFilters } = useFilters();
   return (
     <Button
-      className="font-medium text-base cursor-pointer opacity-0 max-[930px]:opacity-100"
+      className="font-medium text-base cursor-pointer hidden max-[930px]:block"
       size="default"
       variant={"outline"}
       onClick={toggleFilters}

@@ -1,15 +1,20 @@
 import { productsStore } from "./products-store";
 import { getProductsApi } from "../api/get-products-api";
 import { getErrorMessage } from "@/shared";
+import { ProductsWithFilters } from "./products-type";
 
 export const useProducts = () => {
   const store = productsStore();
 
-  const loadProducts = async () => {
+  const loadProducts = async (
+    filters: ProductsWithFilters = {},
+    signal?: AbortSignal,
+  ) => {
     store.setStatus("loading");
 
     try {
-      const res = await getProductsApi();
+      const res = await getProductsApi(filters, signal);
+      if (!res) return;
 
       if (res.success) {
         productsStore.setState({
@@ -34,13 +39,11 @@ export const useProducts = () => {
     }
   };
 
-  const productsLength = store.items.length;
   return {
     products: store.items,
     error: store.error,
     message: store.message,
     loadProducts,
-    productsLength,
     status: store.status,
   };
 };
