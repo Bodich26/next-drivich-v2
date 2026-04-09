@@ -25,7 +25,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
       {/* CONTENT */}
       <div className="pt-2 pb-4 pr-4 pl-4 bg-card rounded-b-md">
         <Link
-          className="text-xl font-bold uppercase"
+          className="text-xl font-bold uppercase mb-1 block"
           href={`${PUBLIC_ROUTES.PRODUCT}/${product.id}`}
         >
           {product.model}
@@ -33,7 +33,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
 
         <DecorLine />
 
-        <div className="flex flex-row justify-between mt-[8px]">
+        <div className="flex flex-row justify-between mt-[8px] mt-1">
           <PriceProduct
             price={product.price}
             discount={product.discount}

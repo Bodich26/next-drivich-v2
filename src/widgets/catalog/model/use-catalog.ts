@@ -1,18 +1,20 @@
 "use client";
 import React from "react";
 import { useProducts } from "@/entities/product";
-import { useFilters } from "@/features/filters";
+import { useChangeFilters } from "@/features/filters";
 import { debounce } from "lodash";
 
 export const useCatalog = () => {
   const { loadProducts, status, error, products } = useProducts();
-  const { searchModel } = useFilters();
+  const { searchModel, priceMin, priceMax } = useChangeFilters();
 
   const filters = React.useMemo(
     () => ({
       searchModel: searchModel || undefined,
+      priceMin,
+      priceMax,
     }),
-    [searchModel],
+    [priceMax, priceMin, searchModel],
   );
 
   const controllerRef = React.useRef<AbortController | null>(null);

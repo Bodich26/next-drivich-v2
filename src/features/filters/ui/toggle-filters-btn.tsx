@@ -1,9 +1,9 @@
 import { Button } from "@/shared";
 import { Filter } from "lucide-react";
-import { useFilters } from "../model/use-filters";
+import { useControlFilters } from "../model/use-control-filter";
 
 export const ToggleFilterBtn = () => {
-  const { toggleFilters } = useFilters();
+  const { toggleFilters } = useControlFilters();
   return (
     <Button
       className="font-medium text-base cursor-pointer hidden max-[930px]:block"
