@@ -1,9 +1,9 @@
 import { Button } from "@/shared";
 import { CircleX } from "lucide-react";
-import { useControlFilters } from "../model/use-control-filter";
+import { useChangeFilters } from "../model/use-change-filters";
 
 export const ResetFiltersBtn = () => {
-  const { resetFilters } = useControlFilters();
+  const { resetFilters } = useChangeFilters();
   return (
     <Button
       className="font-medium text-base cursor-pointer block"

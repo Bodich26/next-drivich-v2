@@ -1,10 +1,25 @@
-import { ProductsWithFilters } from "@/entities/product";
-
-export type FiltersStore = ProductsWithFilters & {
-  toggle: boolean;
-  setFilters: (value: boolean) => void;
-  toggleFilters: () => void;
+import { ProductFilters } from "@/entities/product";
+export interface FilterActions {
   setSearchModel: (value: string) => void;
   setPriceRange: (min?: number, max?: number) => void;
   resetFilters: () => void;
-};
+}
+
+export interface FiltersStore extends ProductFilters {
+  actions: FilterActions;
+}
+
+//---------
+
+export interface DisplayFilterState {
+  isOpen: boolean;
+}
+export interface DisplayFilterActions {
+  open: () => void;
+  close: () => void;
+  toggle: () => void;
+}
+
+export interface DisplayFilterStore extends DisplayFilterState {
+  actions: DisplayFilterActions;
+}

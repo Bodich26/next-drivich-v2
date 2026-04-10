@@ -1,16 +1,17 @@
 import { productsStore } from "./products-store";
 import { getProductsApi } from "../api/get-products-api";
 import { getErrorMessage } from "@/shared";
-import { ProductsWithFilters } from "./products-type";
+import { ProductFilters } from "./products-type";
 
 export const useProducts = () => {
   const store = productsStore();
 
   const loadProducts = async (
-    filters: ProductsWithFilters = {},
+    filters: ProductFilters = {},
     signal?: AbortSignal,
   ) => {
-    store.setStatus("loading");
+    const { setStatus } = store.actions;
+    setStatus("loading");
 
     try {
       const res = await getProductsApi(filters, signal);

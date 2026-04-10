@@ -1,12 +1,12 @@
 import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
-import { favoriteStore } from "./favorite-store";
+import { useFavoriteStore } from "./use-favorite-store";
 import { getFavoriteProductsApi } from "../api/get-favorite-products-api";
 import { removeFavoriteProductApi } from "../api/remove-favorite-product-api";
 import { addFavoriteProductApi } from "../api/add-favorite-product-api";
 
 export const useFavorites = () => {
   const currentUser = useCurrentUser();
-  const store = favoriteStore();
+  const store = useFavoriteStore();
 
   const isFavorite = (productId: number) =>
     store.items.some((item) => item.id === productId);
@@ -27,7 +27,7 @@ export const useFavorites = () => {
             "favorites",
             res.message || "Error remove to favorites",
           );
-          store.setError(res.message || "Error remove to favorites");
+          store.actions.setError(res.message || "Error remove to favorites");
           return;
         }
       } else {
@@ -38,7 +38,7 @@ export const useFavorites = () => {
             "favorites",
             res.message || "Error adding to favorites",
           );
-          store.setError(res.message || "Error adding to favorites");
+          store.actions.setError(res.message || "Error adding to favorites");
           return;
         }
       }
@@ -54,7 +54,7 @@ export const useFavorites = () => {
         "favorites",
         errorMessage || "Failed to change favorites",
       );
-      store.setError(errorMessage || "Failed to change favorites");
+      store.actions.setError(errorMessage || "Failed to change favorites");
     }
   };
 
@@ -66,12 +66,12 @@ export const useFavorites = () => {
 
     const productToRemove = store.items.find((item) => item.id === productId);
     if (!productToRemove) return;
-    store.removeFavorite(productId);
+    store.actions.removeFavorite(productId);
 
     try {
       const res = await removeFavoriteProductApi(productId);
       if (!res.success) {
-        store.setError(res.error);
+        store.actions.setError(res.error);
         showToast(
           "error",
           "favorites",
@@ -87,31 +87,31 @@ export const useFavorites = () => {
         "favorites",
         errorMessage || "Failed to change favorites",
       );
-      store.setError(errorMessage || "Error remove to favorites");
+      store.actions.setError(errorMessage || "Error remove to favorites");
     }
   };
 
   const loadFavorites = async () => {
-    store.setStatus("loading");
+    store.actions.setStatus("loading");
 
     try {
       const res = await getFavoriteProductsApi();
       if (res.success) {
-        favoriteStore.setState({
+        useFavoriteStore.setState({
           items: res.data || [],
           status: "success",
           error: null,
           message: res.message || "Favorites loaded successfully",
         });
       } else {
-        favoriteStore.setState({
+        useFavoriteStore.setState({
           items: [],
           status: "error",
           error: res.error || "Failed to load favorites",
         });
       }
     } catch (err: unknown) {
-      favoriteStore.setState({
+      useFavoriteStore.setState({
         items: [],
         status: "error",
         error: getErrorMessage(err),

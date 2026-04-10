@@ -6,15 +6,14 @@ export type FavoriteProduct = Pick<
   "id" | "brand" | "model" | "imageSrc" | "price" | "discount"
 >;
 
-export type FavoritesState = {
+export type FavoriteState = {
   items: FavoriteProduct[];
-  isLoading: boolean;
   error: string | null;
   message: string | null;
   status: loadingStatus;
 };
 
-export type FavoritesStore = FavoritesState & {
+export interface FavoriteActions {
   setFavorites: (items: FavoriteProduct[]) => void;
   addFavorite: (product: FavoriteProduct) => void;
   removeFavorite: (productId: number) => void;
@@ -22,4 +21,8 @@ export type FavoritesStore = FavoritesState & {
   setStatus: (status: loadingStatus) => void;
   setError: (error: string | null) => void;
   setMessage: (message: string | null) => void;
-};
+}
+
+export interface FavoriteStore extends FavoriteState {
+  actions: FavoriteActions;
+}

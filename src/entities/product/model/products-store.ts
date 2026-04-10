@@ -1,19 +1,25 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { ProductsStore } from "./products-type";
+import { ProductsState, ProductsStore } from "./products-store-type";
+
+const defaultProducts: ProductsState = {
+  items: [],
+  error: null,
+  message: null,
+  status: "idle",
+};
 
 export const productsStore = create<ProductsStore>()(
   devtools(
     (set) => ({
-      items: [],
-      error: null,
-      message: null,
-      status: "idle",
+      ...defaultProducts,
 
-      setProducts: (items) => set({ items }),
-      setStatus: (status) => set({ status }),
-      setError: (error) => set({ error }),
-      setMessage: (message) => set({ message }),
+      actions: {
+        setProducts: (items) => set({ items }),
+        setStatus: (status) => set({ status }),
+        setError: (error) => set({ error }),
+        setMessage: (message) => set({ message }),
+      },
     }),
     { name: "ProductsStore" },
   ),

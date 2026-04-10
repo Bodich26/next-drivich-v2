@@ -1,7 +1,7 @@
 "use client";
 import { cn, Container, DisplayError, SkeletonProduct } from "@/shared";
 import { ProductItem } from "@/entities/product";
-import { CatalogTop } from "./catalog-top";
+import { CatalogSorted } from "./catalog-sorted";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 import { FiltersList } from "@/features/filters";
 import { useCatalog } from "../model/use-catalog";
@@ -14,7 +14,7 @@ export const CatalogList = () => {
       <section className="flex justify-between gap-8 flex-1 relative">
         <FiltersList />
         <div className="flex-1 min-w-0">
-          <CatalogTop productsLength={productsLength} />
+          <CatalogSorted productsLength={productsLength} />
           {status === "idle" || status === "loading" ? (
             <SkeletonProduct variant="catalog" />
           ) : error ? (

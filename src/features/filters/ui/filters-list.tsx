@@ -1,21 +1,21 @@
 import { cn, DecorLine, Field, FieldLabel, Input } from "@/shared";
 import { useChangeFilters } from "../model/use-change-filters";
-import { useControlFilters } from "../model/use-control-filter";
+import { useDisplayFilterStore } from "../model/use-display-filter-store";
 // import { CheckboxGroup } from "./checkbox-group";
 import { RangeSlider } from "./range-slider";
 import { ResetFiltersBtn } from "./reset-filters-btn";
 
 export const FiltersList = () => {
-  const { toggle, toggleFilters } = useControlFilters();
+  const { isOpen, actions } = useDisplayFilterStore();
   const { handleSearchModel, searchModel, priceRange, handlePriceRangeChange } =
     useChangeFilters();
 
   return (
     <>
-      {toggle && (
+      {isOpen && (
         <div
           className="fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0"
-          onClick={toggleFilters}
+          onClick={actions.toggle}
         />
       )}
 
@@ -34,7 +34,7 @@ export const FiltersList = () => {
 
           // АНИМАЦИЯ
           "transition-transform duration-300",
-          toggle
+          isOpen
             ? "max-[930px]:translate-x-0"
             : "max-[930px]:-translate-x-full",
         )}
