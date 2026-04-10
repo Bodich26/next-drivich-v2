@@ -3,11 +3,11 @@ import Link from "next/link";
 import { BadgeSales, DecorLine } from "@/shared";
 import { PriceProduct } from "./price-product";
 import { ProductInfo } from "./product-info";
-import { Products } from "../model/products-type";
+import { ProductEntities } from "../model/products-type";
 import { PUBLIC_ROUTES } from "@/../routes";
 
 type Props = {
-  product: Products;
+  product: ProductEntities;
   children: React.ReactNode;
 };
 

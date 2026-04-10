@@ -1,10 +1,10 @@
 import { apiClientQs } from "@/shared";
 import { API_ROUTES } from "@/../routes";
-import { ProductsWithFilters } from "../model/products-type";
+import { ProductFilters } from "../model/products-type";
 import axios from "axios";
 
 export async function getProductsApi(
-  filters: ProductsWithFilters = {},
+  filters: ProductFilters = {},
   signal?: AbortSignal,
 ) {
   const PRODUCTS_URL = `${API_ROUTES.PRODUCTS}`;

@@ -1,9 +1,6 @@
-import { loadingStatus } from "@/shared";
 import { Product } from "@prisma/client";
-
-export type Products = Omit<Product, "createdAt" | "updatedAt">;
-
-export type ProductsWithFilters = {
+export type ProductEntities = Omit<Product, "createdAt" | "updatedAt">;
+export interface ProductFilters {
   priceMin?: number;
   priceMax?: number;
   engine?: boolean;
@@ -11,29 +8,7 @@ export type ProductsWithFilters = {
   searchModel?: string;
   powerRanges?: { min: number; max: number }[];
   sort?: "cheap" | "expensive" | "newest";
-};
+}
 
-export type ProductWithQuantity = Product & { quantity: number | 0 };
-
+export type ProductWithQuantity = ProductEntities & { quantity: number | 0 };
 export type PriceProductView = "main" | "catalog" | "cart" | "favorites";
-
-export type PriceProductProps = {
-  price: number;
-  discount?: number;
-  view: PriceProductView;
-};
-
-export type ProductsState = {
-  items: Products[];
-  isLoading: boolean;
-  error: string | null;
-  message: string | null;
-  status: loadingStatus;
-};
-
-export type ProductsStore = ProductsState & {
-  setProducts: (items: Products[]) => void;
-  setStatus: (status: loadingStatus) => void;
-  setError: (error: string | null) => void;
-  setMessage: (message: string | null) => void;
-};

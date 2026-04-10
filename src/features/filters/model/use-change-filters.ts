@@ -1,11 +1,10 @@
-import { filtersStore } from "./filters-store";
+import { useFiltersStore } from "./use-filters-store";
 
 export const useChangeFilters = () => {
-  const searchModel = filtersStore((state) => state.searchModel);
-  const setSearchModel = filtersStore((state) => state.setSearchModel);
-  const priceMin = filtersStore((state) => state.priceMin);
-  const priceMax = filtersStore((state) => state.priceMax);
-  const setPriceRange = filtersStore((state) => state.setPriceRange);
+  const { setSearchModel, setPriceRange, resetFilters } = useFiltersStore(
+    (state) => state.actions,
+  );
+  const { priceMin, priceMax, searchModel } = useFiltersStore((state) => state);
 
   const handleSearchModel = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchModel(e.target.value);
@@ -24,5 +23,6 @@ export const useChangeFilters = () => {
     priceRange,
     priceMin,
     priceMax,
+    resetFilters,
   };
 };

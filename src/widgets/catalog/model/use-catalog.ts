@@ -10,7 +10,7 @@ export const useCatalog = () => {
 
   const filters = React.useMemo(
     () => ({
-      searchModel: searchModel || undefined,
+      searchModel: searchModel?.trim() || undefined,
       priceMin,
       priceMax,
     }),
@@ -18,21 +18,32 @@ export const useCatalog = () => {
   );
 
   const controllerRef = React.useRef<AbortController | null>(null);
+  const loadRef = React.useRef(loadProducts);
+
+  React.useEffect(() => {
+    loadRef.current = loadProducts;
+  }, [loadProducts]);
 
   const debouncedLoad = React.useMemo(
     () =>
+      // eslint-disable-next-line react-hooks/refs
       debounce((filters) => {
         controllerRef.current?.abort();
+
         const controller = new AbortController();
         controllerRef.current = controller;
-        loadProducts(filters, controller.signal);
+
+        loadRef.current(filters, controller.signal);
       }, 700),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
   React.useEffect(() => {
     debouncedLoad(filters);
+
+    return () => {
+      debouncedLoad.cancel();
+    };
   }, [filters, debouncedLoad]);
 
   return {

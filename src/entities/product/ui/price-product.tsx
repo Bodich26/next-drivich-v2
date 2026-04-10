@@ -1,6 +1,12 @@
 import { PriceFormat } from "@/shared";
-import { PriceProductView, PriceProductProps } from "../model/products-type";
+import { PriceProductView } from "../model/products-type";
 import { calcDiscountPrice } from "../model/calc-discount-price";
+
+export type PriceProductProps = {
+  price: number;
+  discount?: number;
+  view: PriceProductView;
+};
 
 export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
   const hasDiscount = discount && discount > 0;
