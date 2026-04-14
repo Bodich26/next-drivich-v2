@@ -2,6 +2,9 @@ import { ProductFilters } from "@/entities/product";
 export interface FilterActions {
   setSearchModel: (value: string) => void;
   setPriceRange: (min?: number, max?: number) => void;
+  setEngine: (value: boolean | undefined) => void;
+  setElectro: (value: boolean | undefined) => void;
+  setPowerRanges: (ranges: string[]) => void;
   resetFilters: () => void;
 }
 

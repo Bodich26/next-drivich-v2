@@ -1,73 +1,69 @@
-// "use client";
+"use client";
+import React from "react";
+import { FilterCheckbox, FilterCheckboxProps } from "./filters-checkbox";
 
-// import React from "react";
-// import { useSet } from "react-use";
-// import { FilterCheckbox, FilterCheckboxProps } from "./filters-checkbox";
+type Item = FilterCheckboxProps;
 
-// type Item = FilterCheckboxProps;
+type Props = {
+  title: string;
+  items: Item[];
+  defaultItems?: Item[];
+  limit?: number;
+  className?: string;
+  selectedValues?: string[];
+  onChange: (values: string[]) => void;
+};
+export const CheckboxGroup = ({
+  title,
+  items,
+  defaultItems,
+  limit = 5,
+  className,
+  selectedValues = [],
+  onChange,
+}: Props) => {
+  const [showAll, setShowAll] = React.useState(false);
 
-// type Props = {
-//   title: string;
-//   items: Item[];
-//   defaultItems: Item[];
-//   limit?: number;
-//   onChange?: (values: string[]) => void;
-//   defaultValue?: string[];
-//   className?: string;
-// };
-// export const CheckboxGroup = ({
-//   title,
-//   items,
-//   defaultItems,
-//   limit = 5,
-//   className,
-//   onChange,
-//   defaultValue,
-// }: Props) => {
-//   const [showAll, setShowAll] = React.useState(false);
-//   const [selected, { add, toggle }] = useSet<string>(new Set([]));
+  const handleCheckedChange = (value: string) => {
+    const current = [...selectedValues];
 
-//   const onCheckedChange = (value: string) => {
-//     toggle(value);
-//   };
+    if (current.includes(value)) {
+      const newSelected = current.filter((v) => v !== value);
+      onChange(newSelected);
+    } else {
+      const newSelected = [...current, value];
+      onChange(newSelected);
+    }
+  };
 
-//   React.useEffect(() => {
-//     if (defaultValue) {
-//       defaultValue.forEach(add);
-//     }
-//   });
+  const displayedItems = showAll ? items : defaultItems || items;
 
-//   React.useEffect(() => {
-//     onChange?.(Array.from(selected));
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [selected]);
+  return (
+    <div className={className}>
+      <p className="font-medium text-lg mb-3">{title}</p>
+      <div className="flex flex-col gap-2 max-h-96 overflow-auto scrollbar">
+        {displayedItems.map((item) => (
+          <FilterCheckbox
+            key={String(item.value)}
+            value={item.value}
+            text={item.text}
+            endAdornment={item.endAdornment}
+            checked={selectedValues?.includes(String(item.value)) ?? false}
+            onCheckedChange={() => handleCheckedChange(String(item.value))}
+          />
+        ))}
+      </div>
 
-//   return (
-//     <div className={className}>
-//       <p className="font-medium text-lg mb-3">{title}</p>
-//       <div className="flex flex-col gap-2 max-h-96 overflow-auto scrollbar">
-//         {(showAll ? items : defaultItems || items).map((item) => (
-//           <FilterCheckbox
-//             onCheckedChange={() => onCheckedChange(item.value)}
-//             checked={selected.has(item.value)}
-//             key={String(item.value)}
-//             value={item.value}
-//             text={item.text}
-//             endAdornment={item.endAdornment}
-//           />
-//         ))}
-//       </div>
-
-//       {items.length > limit && (
-//         <div className={showAll ? "" : ""}>
-//           <button
-//             onClick={() => setShowAll(!showAll)}
-//             className="text-primary mt-3"
-//           >
-//             {showAll ? "Hide" : "+ Show All"}
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
+      {items.length > limit && (
+        <div className={showAll ? "" : ""}>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="text-primary mt-3"
+          >
+            {showAll ? "Hide" : "+ Show All"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};

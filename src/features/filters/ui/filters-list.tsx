@@ -4,11 +4,21 @@ import { useDisplayFilterStore } from "../model/use-display-filter-store";
 // import { CheckboxGroup } from "./checkbox-group";
 import { RangeSlider } from "./range-slider";
 import { ResetFiltersBtn } from "./reset-filters-btn";
+import { CheckboxGroup } from "./checkbox-group";
 
 export const FiltersList = () => {
   const { isOpen, actions } = useDisplayFilterStore();
-  const { handleSearchModel, searchModel, priceRange, handlePriceRangeChange } =
-    useChangeFilters();
+  const {
+    handleSearchModel,
+    searchModel,
+    priceRange,
+    handlePriceRangeChange,
+    handleEngineTypeChange,
+    electro,
+    engine,
+    powerRanges,
+    handlePowerRangeChange,
+  } = useChangeFilters();
 
   return (
     <>
@@ -70,78 +80,49 @@ export const FiltersList = () => {
               onValueChange={handlePriceRangeChange}
             />
           </Field>
+          <CheckboxGroup
+            title="Engine type"
+            limit={2}
+            selectedValues={[
+              ...(engine === true ? ["engine"] : []),
+              ...(electro === true ? ["electro"] : []),
+            ]}
+            onChange={handleEngineTypeChange}
+            defaultItems={[
+              { text: "Engine", value: "engine" },
+              { text: "Electro", value: "electro" },
+            ]}
+            items={[
+              {
+                text: "Engine",
+                value: "engine",
+              },
+              {
+                text: "Electro",
+                value: "electro",
+              },
+            ]}
+          />
+          <CheckboxGroup
+            title="Power"
+            limit={4}
+            selectedValues={powerRanges}
+            onChange={handlePowerRangeChange}
+            defaultItems={[
+              { text: "250-300 hp", value: "250-300" },
+              { text: "300-400 hp", value: "300-400" },
+              { text: "400-500 hp", value: "400-500" },
+            ]}
+            items={[
+              { text: "250-300 hp", value: "250-300" },
+              { text: "300-400 hp", value: "300-400" },
+              { text: "400-500 hp", value: "400-500" },
+              { text: "500-600 hp", value: "500-600" },
+              { text: "600-700 hp", value: "600-700" },
+              { text: "> 700 hp", value: ">700" },
+            ]}
+          />
         </div>
-
-        {/* <CheckboxGroup
-          title="Engine type"
-          limit={2}
-          onChange={handleEngineTypeChange}
-          defaultItems={[
-            {
-              text: "Engine",
-              value: "1",
-            },
-            {
-              text: "Electro",
-              value: "2",
-            },
-          ]}
-          items={[
-            {
-              text: "Engine",
-              value: "1",
-            },
-            {
-              text: "Electro",
-              value: "2",
-            },
-          ]}
-        />
-        <CheckboxGroup
-          title="Power"
-          limit={3}
-          onChange={handlePowerChange}
-          defaultItems={[
-            {
-              text: "250-300 hp",
-              value: "3",
-            },
-            {
-              text: "300-400 hp",
-              value: "4",
-            },
-            {
-              text: "400-500 hp",
-              value: "5",
-            },
-          ]}
-          items={[
-            {
-              text: "250-300 hp",
-              value: "3",
-            },
-            {
-              text: "300-400 hp",
-              value: "4",
-            },
-            {
-              text: "400-500 hp",
-              value: "5",
-            },
-            {
-              text: "500-600 hp",
-              value: "6",
-            },
-            {
-              text: "600-700 hp",
-              value: "7",
-            },
-            {
-              text: "> 700 hp",
-              value: "8",
-            },
-          ]}
-        /> */}
       </aside>
     </>
   );

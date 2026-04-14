@@ -6,15 +6,19 @@ import { debounce } from "lodash";
 
 export const useCatalog = () => {
   const { loadProducts, status, error, products } = useProducts();
-  const { searchModel, priceMin, priceMax } = useChangeFilters();
+  const { searchModel, priceMin, priceMax, engine, electro, powerRanges } =
+    useChangeFilters();
 
   const filters = React.useMemo(
     () => ({
       searchModel: searchModel?.trim() || undefined,
       priceMin,
       priceMax,
+      engine,
+      electro,
+      powerRanges,
     }),
-    [priceMax, priceMin, searchModel],
+    [priceMax, priceMin, searchModel, electro, engine, powerRanges],
   );
 
   const controllerRef = React.useRef<AbortController | null>(null);

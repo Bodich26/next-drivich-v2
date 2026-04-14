@@ -6,7 +6,7 @@ export interface ProductFilters {
   engine?: boolean;
   electro?: boolean;
   searchModel?: string;
-  powerRanges?: { min: number; max: number }[];
+  powerRanges?: string[];
   sort?: "cheap" | "expensive" | "newest";
 }
 
