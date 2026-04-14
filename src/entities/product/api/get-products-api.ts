@@ -15,11 +15,11 @@ export async function getProductsApi(
           gte: filters.priceMin,
           lte: filters.priceMax,
         },
-        engine: filters.engine ? "true" : undefined,
-        electro: filters.electro ? "true" : undefined,
+        engine: filters.engine === true ? true : undefined,
+        electro: filters.electro === true ? true : undefined,
         searchModel: filters.searchModel,
-        powerRanges: filters.powerRanges
-          ? JSON.stringify(filters.powerRanges)
+        powerRanges: filters.powerRanges?.length
+          ? filters.powerRanges
           : undefined,
         sort:
           filters.sort === "cheap"

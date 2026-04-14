@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     const engine = searchParams.get("engine");
     const electro = searchParams.get("electro");
     const model = searchParams.get("searchModel");
-    const powerRangesStr = searchParams.get("powerRanges");
+    const powerRanges = searchParams.getAll("powerRanges[]");
     const sort = searchParams.get("sort");
 
     const filters: Prisma.ProductWhereInput = {};
@@ -42,22 +42,31 @@ export async function GET(req: NextRequest) {
       };
     }
 
-    if (powerRangesStr) {
+    if (powerRanges.length > 0) {
       try {
-        const powerRanges: { min: number; max: number }[] =
-          JSON.parse(powerRangesStr);
+        const orConditions: Prisma.ProductWhereInput[] = powerRanges
+          .map((rangeStr) => {
+            if (rangeStr === ">700") {
+              return { power: { gte: 701 } };
+            }
 
-        if (powerRanges.length > 0) {
-          filters.OR = powerRanges.map((range) => ({
-            power: {
-              gte: range.min,
-              lte: range.max,
-            },
-          }));
+            const [minStr, maxStr] = rangeStr.split("-");
+            const min = Number(minStr);
+            const max = Number(maxStr);
+
+            if (!isNaN(min) && !isNaN(max)) {
+              return { power: { gte: min, lte: max } };
+            }
+
+            return null;
+          })
+          .filter(Boolean) as Prisma.ProductWhereInput[];
+
+        if (orConditions.length > 0) {
+          filters.OR = orConditions;
         }
       } catch (error) {
         console.error(error);
-
         return NextResponse.json(
           { error: "Error while parsing power ranges", success: false },
           { status: 404 },
