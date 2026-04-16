@@ -1,5 +1,6 @@
 import { Product } from "@prisma/client";
 export type ProductEntities = Omit<Product, "createdAt" | "updatedAt">;
+export type SortProducts = "expensive" | "cheap";
 export interface ProductFilters {
   priceMin?: number;
   priceMax?: number;
@@ -7,7 +8,7 @@ export interface ProductFilters {
   electro?: boolean;
   searchModel?: string;
   powerRanges?: string[];
-  sort?: "cheap" | "expensive" | "newest";
+  sort?: SortProducts;
 }
 
 export type ProductWithQuantity = ProductEntities & { quantity: number | 0 };

@@ -1,4 +1,4 @@
-import { ToggleFilterBtn } from "@/features/filters";
+import { SortedProducts, ToggleFilterBtn } from "@/features/filters";
 
 export const CatalogSorted = ({
   productsLength,
@@ -10,8 +10,7 @@ export const CatalogSorted = ({
       <span>{productsLength} result</span>
       <div className="flex items-center gap-3">
         <ToggleFilterBtn />
-        Сортировка
-        {/* <SortedProducts setSortOrder={setSortOrder} /> */}
+        <SortedProducts />
       </div>
     </div>
   );

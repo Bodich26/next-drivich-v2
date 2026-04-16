@@ -1,3 +1,4 @@
+import { SortProducts } from "@/entities/product";
 import { useFiltersStore } from "./use-filters-store";
 
 export const useChangeFilters = () => {
@@ -8,9 +9,17 @@ export const useChangeFilters = () => {
     setElectro,
     setEngine,
     setPowerRanges,
+    setSortByPrice,
   } = useFiltersStore((state) => state.actions);
-  const { priceMin, priceMax, searchModel, electro, engine, powerRanges } =
-    useFiltersStore((state) => state);
+  const {
+    priceMin,
+    priceMax,
+    searchModel,
+    electro,
+    engine,
+    powerRanges,
+    sort,
+  } = useFiltersStore((state) => state);
 
   const handleSearchModel = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchModel(e.target.value);
@@ -31,6 +40,10 @@ export const useChangeFilters = () => {
     setPowerRanges(selectedValues);
   };
 
+  const handleSortedByPrice = (sortedBy: SortProducts) => {
+    setSortByPrice(sortedBy);
+  };
+
   return {
     handleSearchModel,
     searchModel,
@@ -40,9 +53,11 @@ export const useChangeFilters = () => {
     priceMax,
     engine,
     electro,
+    sort,
     powerRanges,
     resetFilters,
     handleEngineTypeChange,
     handlePowerRangeChange,
+    handleSortedByPrice,
   };
 };

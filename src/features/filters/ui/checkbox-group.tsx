@@ -41,7 +41,7 @@ export const CheckboxGroup = ({
   return (
     <div className={className}>
       <p className="font-medium text-lg mb-3">{title}</p>
-      <div className="flex flex-col gap-2 max-h-96 overflow-auto scrollbar">
+      <div className="flex flex-col gap-2">
         {displayedItems.map((item) => (
           <FilterCheckbox
             key={String(item.value)}
@@ -58,9 +58,9 @@ export const CheckboxGroup = ({
         <div className={showAll ? "" : ""}>
           <button
             onClick={() => setShowAll(!showAll)}
-            className="text-primary mt-3"
+            className="text-primary mt-3 cursor-pointer"
           >
-            {showAll ? "Hide" : "+ Show All"}
+            {showAll ? "- Hide" : "+ Show All"}
           </button>
         </div>
       )}

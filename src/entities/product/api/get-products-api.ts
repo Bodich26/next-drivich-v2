@@ -21,12 +21,7 @@ export async function getProductsApi(
         powerRanges: filters.powerRanges?.length
           ? filters.powerRanges
           : undefined,
-        sort:
-          filters.sort === "cheap"
-            ? "asc"
-            : filters.sort === "expensive"
-              ? "desc"
-              : undefined,
+        sort: filters.sort,
       },
       signal,
     });
