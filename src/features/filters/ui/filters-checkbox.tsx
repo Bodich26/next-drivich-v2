@@ -23,7 +23,7 @@ export const FilterCheckbox = ({
         onCheckedChange={onCheckedChange}
         checked={checked}
         value={value}
-        className="rounded-[8px] w-6 h-6 border border-black/15"
+        className="rounded-[8px] w-6 h-6 border border-black/15 cursor-pointer"
         id={`checkbox-${String(value)}`}
       />
       <label

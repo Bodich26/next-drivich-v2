@@ -1,7 +1,6 @@
 import { cn, DecorLine, Field, FieldLabel, Input } from "@/shared";
 import { useChangeFilters } from "../model/use-change-filters";
 import { useDisplayFilterStore } from "../model/use-display-filter-store";
-// import { CheckboxGroup } from "./checkbox-group";
 import { RangeSlider } from "./range-slider";
 import { ResetFiltersBtn } from "./reset-filters-btn";
 import { CheckboxGroup } from "./checkbox-group";
@@ -35,7 +34,7 @@ export const FiltersList = () => {
 
           // DESKTOP
           "w-75 sticky top-0 max-h-[calc(100vh-14rem)] overflow-y-auto",
-          "max-[930px]:static", // убираем hidden
+          "max-[930px]:static",
 
           // MOBILE
           "max-[930px]:fixed max-[930px]:top-0 max-[930px]:left-0 max-[930px]:bottom-0",

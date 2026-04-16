@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { FiltersStore } from "./filters-type";
-import { ProductFilters } from "@/entities/product";
+import { ProductFilters, SortProducts } from "@/entities/product";
 
 const defaultFilters: ProductFilters = {
   searchModel: "",
@@ -10,7 +10,7 @@ const defaultFilters: ProductFilters = {
   engine: undefined,
   electro: undefined,
   powerRanges: [],
-  sort: "newest",
+  sort: "expensive",
 };
 
 export const useFiltersStore = create<FiltersStore>()(
@@ -24,6 +24,7 @@ export const useFiltersStore = create<FiltersStore>()(
         setEngine: (value: boolean | undefined) => set({ engine: value }),
         setElectro: (value: boolean | undefined) => set({ electro: value }),
         setPowerRanges: (ranges: string[]) => set({ powerRanges: ranges }),
+        setSortByPrice: (sort: SortProducts) => set({ sort }),
         resetFilters: () =>
           set({
             ...defaultFilters,
