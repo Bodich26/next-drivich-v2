@@ -29,7 +29,7 @@ export const SkeletonProduct = ({ variant, className }: Props) => {
         return (
           <div
             key={index}
-            className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card"
+            className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card shadow-sm"
           >
             <Skeleton className="h-[141px] rounded-t-md" />
 

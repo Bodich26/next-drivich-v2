@@ -57,7 +57,20 @@ body {
   background-color: var(--color-bg);
 }
 
+.product-gradient {
+  background: linear-gradient(
+    -90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--product-gradient-from) 20%, transparent) 30%,
+    color-mix(in srgb, var(--product-gradient-from) 45%, transparent) 50%,
+    color-mix(in srgb, var(--product-gradient-from) 65%, transparent) 70%,
+    var(--product-gradient-to) 100%
+  );
+}
+
 :root {
+  --product-gradient-from: rgb(234 234 241);
+  --product-gradient-to: rgb(249 250 251);
   --bg-primary: rgb(231, 231, 231);
   --bg-section: oklch(1 0 0);
   --logo-fill: #1b1b1c;
@@ -96,6 +109,8 @@ body {
 }
 
 .dark {
+  --product-gradient-from: rgb(30 30 35);
+  --product-gradient-to: rgb(15 15 20);
   --bg-primary: rgb(20, 20, 20);
   --bg-section: oklch(15.999% 0.0042 285.86);
   --logo-fill: #ffffff;

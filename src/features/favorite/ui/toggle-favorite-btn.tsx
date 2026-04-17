@@ -1,3 +1,4 @@
+"use client";
 import { Heart } from "lucide-react";
 import { cn } from "@/shared";
 import { useFavorites } from "../model/use-favorite";

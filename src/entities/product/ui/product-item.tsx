@@ -13,7 +13,7 @@ type Props = {
 
 export const ProductItem = ({ product, children }: Props) => {
   return (
-    <div className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card">
+    <div className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card shadow-sm">
       {/* IMAGE BLOCK */}
       <div className="relative w-full aspect-[4/2]">
         <BadgeSales discount={product.discount} />

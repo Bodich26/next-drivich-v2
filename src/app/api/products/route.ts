@@ -74,11 +74,19 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    let orderByPrice: Prisma.ProductOrderByWithRelationInput;
+
+    if (sort === "cheap") {
+      orderByPrice = { price: "asc" };
+    } else if (sort === "expensive") {
+      orderByPrice = { price: "desc" };
+    } else {
+      orderByPrice = { createdAt: "desc" };
+    }
+
     const productsList = await prisma.product.findMany({
       where: filters,
-      orderBy: {
-        price: sort === "asc" ? "asc" : "desc",
-      },
+      orderBy: orderByPrice,
     });
 
     if (!productsList) {
