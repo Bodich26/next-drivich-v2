@@ -14,7 +14,11 @@ export async function getProductIdApi(productId: string): Promise<Product> {
 
   try {
     const res = await fetch(PRODUCTS_URL, {
-      cache: "no-store",
+      cache: "force-cache",
+      next: {
+        revalidate: 60,
+        tags: [`product-${productId}`],
+      },
     });
 
     if (!res.ok) {
