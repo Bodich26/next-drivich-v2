@@ -30,7 +30,7 @@ export const FiltersList = () => {
 
       <aside
         className={cn(
-          "bg-card border border-border p-4 rounded-md",
+          "shadow-sm bg-card border border-border p-4 rounded-md",
 
           // DESKTOP
           "w-75 sticky top-0 max-h-[calc(100vh-14rem)] overflow-y-auto",

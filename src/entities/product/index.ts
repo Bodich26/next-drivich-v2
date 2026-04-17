@@ -7,3 +7,4 @@ export type {
   ProductEntities,
   ProductFilters,
 } from "./model/products-type";
+export { getProductIdApi } from "./api/get-product-id-api";
