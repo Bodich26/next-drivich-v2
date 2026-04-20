@@ -10,6 +10,7 @@ export interface FilterActions {
 }
 
 export interface FiltersStore extends ProductFilters {
+  hasChanges: boolean;
   actions: FilterActions;
 }
 

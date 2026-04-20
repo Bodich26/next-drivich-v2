@@ -8,9 +8,11 @@ export const useFavorites = () => {
   const currentUser = useCurrentUser();
   const store = useFavoriteStore();
 
+  ///----
   const isFavorite = (productId: number) =>
     store.items.some((item) => item.id === productId);
 
+  //---
   const toggleFavorite = async (productId: number) => {
     if (!currentUser) {
       showToast("auth", "favorites");
@@ -58,6 +60,7 @@ export const useFavorites = () => {
     }
   };
 
+  ///---
   const removeFavorite = async (productId: number) => {
     if (!currentUser) {
       showToast("auth", "favorites");
@@ -92,6 +95,9 @@ export const useFavorites = () => {
   };
 
   const loadFavorites = async () => {
+    if (!currentUser) {
+      return;
+    }
     store.actions.setStatus("loading");
 
     try {

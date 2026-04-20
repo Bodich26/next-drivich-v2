@@ -33,7 +33,7 @@ export const showToast = (
 
   if (type === "auth") {
     toast.warning("Authorization required", {
-      description: `Please log in to manage your ${entity}`,
+      description: `Please login to manage your ${entity}`,
     });
   }
 };

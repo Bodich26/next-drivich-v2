@@ -17,6 +17,7 @@ export const FiltersList = () => {
     engine,
     powerRanges,
     handlePowerRangeChange,
+    hasChanges,
   } = useChangeFilters();
 
   return (
@@ -50,7 +51,7 @@ export const FiltersList = () => {
       >
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">Product Filtration</h1>
-          <ResetFiltersBtn />
+          {hasChanges && <ResetFiltersBtn />}
         </div>
         <DecorLine className="my-3" />
         <div className="flex flex-col gap-5">

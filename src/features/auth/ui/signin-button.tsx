@@ -6,9 +6,9 @@ import { signIn } from "next-auth/react";
 export const SigninButton = () => {
   return (
     <Button
-      className="font-medium text-base"
+      className="font-medium text-base cursor-pointer"
       type="submit"
-      size={"sm"}
+      size="lg"
       onClick={() => signIn()}
     >
       <LucideUser />
