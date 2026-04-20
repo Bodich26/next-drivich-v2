@@ -19,6 +19,7 @@ export const useChangeFilters = () => {
     engine,
     powerRanges,
     sort,
+    hasChanges,
   } = useFiltersStore((state) => state);
 
   const handleSearchModel = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,5 +60,6 @@ export const useChangeFilters = () => {
     handleEngineTypeChange,
     handlePowerRangeChange,
     handleSortedByPrice,
+    hasChanges,
   };
 };

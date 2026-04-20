@@ -17,17 +17,24 @@ export const useFiltersStore = create<FiltersStore>()(
   devtools(
     (set) => ({
       ...defaultFilters,
+      hasChanges: false,
 
       actions: {
-        setSearchModel: (value) => set({ searchModel: value }),
-        setPriceRange: (min, max) => set({ priceMin: min, priceMax: max }),
-        setEngine: (value: boolean | undefined) => set({ engine: value }),
-        setElectro: (value: boolean | undefined) => set({ electro: value }),
-        setPowerRanges: (ranges: string[]) => set({ powerRanges: ranges }),
-        setSortByPrice: (sort: SortProducts) => set({ sort }),
+        setSearchModel: (value) =>
+          set({ searchModel: value, hasChanges: true }),
+        setPriceRange: (min, max) =>
+          set({ priceMin: min, priceMax: max, hasChanges: true }),
+        setEngine: (value: boolean | undefined) =>
+          set({ engine: value, hasChanges: true }),
+        setElectro: (value: boolean | undefined) =>
+          set({ electro: value, hasChanges: true }),
+        setPowerRanges: (ranges: string[]) =>
+          set({ powerRanges: ranges, hasChanges: true }),
+        setSortByPrice: (sort: SortProducts) => set({ sort, hasChanges: true }),
         resetFilters: () =>
           set({
             ...defaultFilters,
+            hasChanges: false,
           }),
       },
     }),

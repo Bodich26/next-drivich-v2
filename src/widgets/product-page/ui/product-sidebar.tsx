@@ -59,7 +59,9 @@ export const ProductSidebar = ({ price, discount, color, id }: Props) => {
 
         {/* Purchase Section */}
         <div className="pt-6">
-          <div className="text-sm text-muted-foreground mb-1">Price</div>
+          <span className="text-sm text-muted-foreground mb-1">
+            Price {discount ? " - SALE" : ""}
+          </span>
           <PriceProduct view="main" price={price} discount={discount} />
 
           <div className="mt-8 space-y-3">
