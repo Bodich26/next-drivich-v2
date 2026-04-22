@@ -2,7 +2,7 @@ import { ProductEntities, ProductWithQuantity } from "@/entities/product";
 import { loadingStatus } from "@/shared";
 
 export type CartState = {
-  items: ProductEntities[];
+  items: ProductWithQuantity[];
   error: string | null;
   message: string | null;
   status: loadingStatus;

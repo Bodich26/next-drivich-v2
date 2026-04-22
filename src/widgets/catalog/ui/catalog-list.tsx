@@ -5,6 +5,7 @@ import { CatalogSorted } from "./catalog-sorted";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 import { FiltersList } from "@/features/filters";
 import { useCatalog } from "../model/use-catalog";
+import { AddToCartBtn } from "@/features/cart";
 
 export const CatalogList = () => {
   const { products, productsLength, error, status } = useCatalog();
@@ -31,9 +32,16 @@ export const CatalogList = () => {
               )}
             >
               {products.map((product) => (
-                <ProductItem key={product.id} product={product}>
-                  <ToggleFavoriteBtn variant="hover" productId={product.id} />
-                </ProductItem>
+                <ProductItem
+                  key={product.id}
+                  product={product}
+                  favoriteSlot={
+                    <ToggleFavoriteBtn variant="hover" productId={product.id} />
+                  }
+                  cartSlot={
+                    <AddToCartBtn variant="button" productId={product.id} />
+                  }
+                ></ProductItem>
               ))}
             </div>
           )}

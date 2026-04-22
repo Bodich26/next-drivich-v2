@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionWrapper } from "@/features/auth";
 import { auth } from "@/../auth";
 import { Providers, Toaster } from "@/shared";
+import Script from "next/script";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -25,6 +26,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      {process.env.NODE_ENV === "development" && (
+        <head>
+          <Script
+            src="//unpkg.com/react-scan/dist/auto.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        </head>
+      )}
       <body className={`${roboto.variable} antialiased overflow-hidden`}>
         <SessionWrapper session={session}>
           <Providers>{children}</Providers>

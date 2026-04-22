@@ -8,21 +8,24 @@ import { PUBLIC_ROUTES } from "@/../routes";
 
 type Props = {
   product: ProductEntities;
-  children: React.ReactNode;
+  favoriteSlot?: React.ReactNode;
+  cartSlot?: React.ReactNode;
 };
 
-export const ProductItem = ({ product, children }: Props) => {
+export const ProductItem = ({ product, favoriteSlot, cartSlot }: Props) => {
   return (
     <div className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card shadow-sm">
       {/* IMAGE BLOCK */}
       <div className="relative w-full aspect-[4/2]">
         <BadgeSales discount={product.discount} />
-        {children}
+        {favoriteSlot}
         <Image
           src={product.imageSrc}
           alt={product.model}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={true}
         />
       </div>
 
@@ -60,6 +63,7 @@ export const ProductItem = ({ product, children }: Props) => {
             discount={product.discount}
             view="catalog"
           />
+          {cartSlot}
         </div>
       </div>
     </div>
