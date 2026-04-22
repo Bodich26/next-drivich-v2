@@ -14,7 +14,7 @@ export const OpenFavoriteBtn = () => {
         ) : error ? (
           ""
         ) : (
-          countFavorites
+          countFavorites > 0 && countFavorites
         )}
       </Button>
     </SheetTrigger>

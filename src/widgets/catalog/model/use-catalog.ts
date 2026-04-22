@@ -26,7 +26,7 @@ export const useCatalog = () => {
       powerRanges,
       sort,
     }),
-    [priceMax, priceMin, searchModel, electro, engine, powerRanges, sort],
+    [searchModel, priceMin, priceMax, engine, electro, powerRanges, sort],
   );
 
   const controllerRef = React.useRef<AbortController | null>(null);

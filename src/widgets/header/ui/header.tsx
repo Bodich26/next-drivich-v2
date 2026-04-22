@@ -2,19 +2,21 @@
 import React from "react";
 import { UserDropdown } from "@/entities/user";
 import { SigninButton } from "@/features/auth";
-// import { CartBtn } from "@/features/cart";
 import { OpenFavoriteBtn } from "@/features/favorite";
 import { Container, DarkMode, useCurrentUser } from "@/shared";
 import { FavoritesDrawer } from "@/widgets/favorites";
 import { Logo } from "@/shared";
 import { useFavorites } from "@/features/favorite";
+import { CartBtn, useCart } from "@/features/cart";
 
 export const Header = () => {
   const user = useCurrentUser();
   const { loadFavorites } = useFavorites();
+  const { loadCart } = useCart();
 
   React.useEffect(() => {
     loadFavorites();
+    loadCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -29,7 +31,7 @@ export const Header = () => {
                 <FavoritesDrawer>
                   <OpenFavoriteBtn />
                 </FavoritesDrawer>
-                {/* <CartBtn /> */}
+                <CartBtn />
                 <UserDropdown />
               </>
             ) : (

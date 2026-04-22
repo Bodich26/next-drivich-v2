@@ -8,10 +8,12 @@ import {
   SelectValue,
 } from "@/shared";
 import { SortProducts } from "@/entities/product";
-import { useChangeFilters } from "../model/use-change-filters";
+import { useFiltersStore } from "../model/use-filters-store";
 
 export const SortedProducts = () => {
-  const { handleSortedByPrice } = useChangeFilters();
+  const handleSortedByPrice = useFiltersStore(
+    (state) => state.actions.setSortByPrice,
+  );
   return (
     <div className="flex items-center gap-2">
       <span>Sort by</span>
