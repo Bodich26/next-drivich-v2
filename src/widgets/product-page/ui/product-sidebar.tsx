@@ -1,4 +1,5 @@
 import { PriceProduct } from "@/entities/product";
+import { AddToCartBtn } from "@/features/cart";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 import { DecorLine } from "@/shared";
 import { Product } from "@prisma/client";
@@ -7,7 +8,7 @@ import { Star } from "lucide-react";
 type Props = Pick<Product, "price" | "discount" | "color" | "id">;
 export const ProductSidebar = ({ price, discount, color, id }: Props) => {
   return (
-    <div className="lg:col-span-4">
+    <aside className="lg:col-span-4">
       <div className="sticky top-8 bg-card border border-border rounded-md p-8 shadow-sm">
         {/* Rating + Favorite */}
         <div className="flex justify-between items-center mb-8">
@@ -65,11 +66,10 @@ export const ProductSidebar = ({ price, discount, color, id }: Props) => {
           <PriceProduct view="main" price={price} discount={discount} />
 
           <div className="mt-8 space-y-3">
-            {/* <ButtonBuyNow productId={currentProduct.id} className="w-full py-6 text-lg" /> */}
-            {/* <ButtonAddToCart productId={currentProduct.id} variant="outline" className="w-full" /> */}
+            <AddToCartBtn variant="icon" productId={id} />
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };

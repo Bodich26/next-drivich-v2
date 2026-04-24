@@ -3,6 +3,7 @@ import React from "react";
 import {
   DecorLine,
   DisplayError,
+  EmptyState,
   Sheet,
   SheetContent,
   SheetHeader,
@@ -34,11 +35,12 @@ export const FavoritesDrawer = ({
         ) : error ? (
           <DisplayError title="An error has occurred" error={error} />
         ) : countFavorites === 0 ? (
-          <DisplayError
-            title="Favorite is empty"
-            error={
+          <EmptyState
+            desc={
               "There are no products in your favorites, please add a product."
             }
+            title="Your favorite is empty"
+            icon="❤️"
           />
         ) : (
           <FavoritesList className="px-2" products={favorites} />

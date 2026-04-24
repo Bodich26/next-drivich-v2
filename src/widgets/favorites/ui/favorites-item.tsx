@@ -1,11 +1,11 @@
+import Image from "next/image";
+import Link from "next/link";
 import { PriceProduct } from "@/entities/product";
-// import { AddToCartBtn } from "@/features/cart";
 import { RemoveFavoriteBtn } from "@/features/favorite";
 import { FavoriteProduct } from "@/features/favorite/model/favorite-type";
 import { BadgeSales, DecorLine } from "@/shared";
-import Image from "next/image";
-import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/../routes";
+import { AddToCartBtn } from "@/features/cart";
 
 export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
   return (
@@ -39,7 +39,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
             discount={product.discount}
             view="favorites"
           />
-          {/* <AddToCartBtn variant="icon" productId={product.id} /> */}
+          <AddToCartBtn variant="icon" productId={product.id} />
         </div>
       </div>
     </div>

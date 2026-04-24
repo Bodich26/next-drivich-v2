@@ -1,5 +1,6 @@
+"use client";
 import { Button, cn } from "@/shared";
-import { ShoppingBag } from "lucide-react";
+import { Check, ShoppingBag } from "lucide-react";
 import { useCart } from "../model/use-cart";
 
 type ButtonAddToCartProps = {
@@ -22,7 +23,7 @@ export const AddToCartBtn = ({
         className={cn(
           "font-medium text-base w-[128px] px-2 cursor-pointer",
           className,
-          wasCart && "opacity-50 cursor-not-allowed",
+          wasCart ? "bg-green-100 text-green-600" : "",
         )}
         size="lg"
         onClick={() => handleAddToCart(productId)}
@@ -31,16 +32,27 @@ export const AddToCartBtn = ({
       </Button>
     ),
     icon: (
-      <ShoppingBag
-        width={32}
-        height={32}
-        className={cn(
-          "stroke-primary cursor-pointer",
-          className,
-          wasCart && "opacity-50 cursor-not-allowed",
-        )}
+      <Button
+        size={"lg"}
         onClick={() => handleAddToCart(productId)}
-      />
+        disabled={wasCart}
+        className={cn(
+          "flex items-center gap-2 px-4 py-2 rounded-xl transition",
+          wasCart ? "bg-green-100 text-green-600" : "",
+        )}
+      >
+        {wasCart ? (
+          <>
+            <Check size={16} />
+            Added
+          </>
+        ) : (
+          <>
+            <ShoppingBag size={16} />
+            Add to cart
+          </>
+        )}
+      </Button>
     ),
   };
 
