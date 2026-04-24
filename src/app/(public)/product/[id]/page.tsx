@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <Container>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 space-y-10">
           <ProductHero
             brand={brand}
@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: Props) {
           price={price}
           discount={discount}
         />
-      </div>
+      </section>
     </Container>
   );
 }

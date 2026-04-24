@@ -1,5 +1,11 @@
 "use client";
-import { cn, Container, DisplayError, SkeletonProduct } from "@/shared";
+import {
+  cn,
+  Container,
+  DisplayError,
+  EmptyState,
+  SkeletonProduct,
+} from "@/shared";
 import { ProductItem } from "@/entities/product";
 import { CatalogSorted } from "./catalog-sorted";
 import { ToggleFavoriteBtn } from "@/features/favorite";
@@ -21,9 +27,12 @@ export const CatalogList = () => {
           ) : error ? (
             <DisplayError error={error} title="Product Catalog" />
           ) : productsLength === 0 ? (
-            <DisplayError
-              error={"Such products do not exist"}
-              title="Product Catalog"
+            <EmptyState
+              desc={
+                "Looks like you haven’t added anything yet. Start exploring and find your dream car."
+              }
+              title="Product catalog is empty"
+              icon="🛒"
             />
           ) : (
             <div
