@@ -1,15 +1,20 @@
-import { ProductEntities, ProductWithQuantity } from "@/entities/product";
+import { ProductWithQuantity } from "@/entities/product";
 import { loadingStatus } from "@/shared";
 
+export type ProductInCart = Omit<ProductWithQuantity, "color"> & {
+  color: string;
+  quantity: number;
+};
+
 export type CartState = {
-  items: ProductWithQuantity[];
+  items: ProductInCart[];
   error: string | null;
   message: string | null;
   status: loadingStatus;
 };
 
 export interface CartActions {
-  setCart: (items: ProductWithQuantity[]) => void;
+  setCart: (items: ProductInCart[]) => void;
   clearCart: () => void;
   setStatus: (status: loadingStatus) => void;
   setError: (error: string | null) => void;
@@ -19,3 +24,8 @@ export interface CartActions {
 export interface CartStore extends CartState {
   actions: CartActions;
 }
+
+export type CartItemProps = Pick<
+  ProductInCart,
+  "id" | "imageSrc" | "model" | "price" | "color" | "quantity"
+>;

@@ -8,11 +8,11 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SkeletonProduct,
 } from "@/shared";
 import { CloseFavoriteBtn } from "@/features/favorite";
 import { FavoritesList } from "./favorites-list";
 import { useFavorites } from "@/features/favorite";
+import { FavoritesListSkeleton } from "./favorites-list-skeleton";
 
 export const FavoritesDrawer = ({
   children,
@@ -31,7 +31,7 @@ export const FavoritesDrawer = ({
           <DecorLine />
         </SheetHeader>
         {status === "idle" || status === "loading" ? (
-          <SkeletonProduct variant="favorites" />
+          <FavoritesListSkeleton />
         ) : error ? (
           <DisplayError title="An error has occurred" error={error} />
         ) : countFavorites === 0 ? (
