@@ -1,17 +1,12 @@
 "use client";
-import {
-  cn,
-  Container,
-  DisplayError,
-  EmptyState,
-  SkeletonProduct,
-} from "@/shared";
+import { cn, Container, DisplayError, EmptyState } from "@/shared";
 import { ProductItem } from "@/entities/product";
 import { CatalogSorted } from "./catalog-sorted";
 import { ToggleFavoriteBtn } from "@/features/favorite";
 import { FiltersList } from "@/features/filters";
 import { useCatalog } from "../model/use-catalog";
 import { AddToCartBtn } from "@/features/cart";
+import { CatalogListSkeleton } from "./catalog-list-skeleton";
 
 export const CatalogList = () => {
   const { products, productsLength, error, status } = useCatalog();
@@ -23,7 +18,7 @@ export const CatalogList = () => {
         <div className="flex-1 min-w-0">
           <CatalogSorted productsLength={productsLength} />
           {status === "idle" || status === "loading" ? (
-            <SkeletonProduct variant="catalog" />
+            <CatalogListSkeleton />
           ) : error ? (
             <DisplayError error={error} title="Product Catalog" />
           ) : productsLength === 0 ? (

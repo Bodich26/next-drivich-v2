@@ -1,6 +1,6 @@
 import { cn } from "@/shared";
 import { FavoriteItem } from "./favorites-item";
-import { FavoriteProduct } from "@/features/favorite/model/favorite-type";
+import { FavoriteProduct } from "@/features/favorite";
 
 type ProductListProps = {
   products: FavoriteProduct[];
