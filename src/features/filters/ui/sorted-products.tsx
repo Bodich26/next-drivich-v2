@@ -6,8 +6,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SortProducts,
 } from "@/shared";
-import { SortProducts } from "@/entities/product";
 import { useFiltersStore } from "../model/use-filters-store";
 
 export const SortedProducts = () => {
