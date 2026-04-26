@@ -15,7 +15,9 @@ export type CartState = {
 
 export interface CartActions {
   setCart: (items: ProductInCart[]) => void;
+  removeCart: (items: number) => void;
   clearCart: () => void;
+  updateQuantity: (productId: number, quantity: number) => void;
   setStatus: (status: loadingStatus) => void;
   setError: (error: string | null) => void;
   setMessage: (message: string | null) => void;

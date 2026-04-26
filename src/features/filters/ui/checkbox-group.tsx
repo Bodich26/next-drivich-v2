@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { FilterCheckbox, FilterCheckboxProps } from "./filters-checkbox";
+import { FilterCheckbox } from "./filters-checkbox";
+import { FilterCheckboxProps } from "../model/filters-type";
 
 type Item = FilterCheckboxProps;
 
@@ -13,6 +14,7 @@ type Props = {
   selectedValues?: string[];
   onChange: (values: string[]) => void;
 };
+
 export const CheckboxGroup = ({
   title,
   items,

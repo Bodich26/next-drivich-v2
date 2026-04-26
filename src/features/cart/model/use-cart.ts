@@ -2,6 +2,8 @@ import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
 import { useCartStore } from "./use-cart-store";
 import { getCartApi } from "../api/get-cart-api";
 import { addToCartApi } from "../api/add-to-cart-api";
+import { deleteFromCartApi } from "../api/delete-from-cart-api";
+import { toggleFromCartApi } from "../api/toggle-from-cart-api";
 
 export const useCart = () => {
   const currentUser = useCurrentUser();
@@ -73,6 +75,59 @@ export const useCart = () => {
       });
     }
   };
+  //---
+
+  const handelRemoveCart = async (productId: number) => {
+    if (!currentUser) {
+      showToast("auth", "cart");
+      return;
+    }
+
+    const productToRemove = store.items.find((item) => item.id === productId);
+    if (!productToRemove) return;
+    store.actions.removeCart(productId);
+
+    try {
+      const res = await deleteFromCartApi(productId);
+      if (!res.success) {
+        store.actions.setError(res.error);
+        showToast("error", "cart", res.message || "Failed to remove cart");
+        return;
+      }
+      showToast("remove", "cart");
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
+      showToast("error", "cart", errorMessage || "Failed to change cart");
+      store.actions.setError(errorMessage || "Error remove to cart");
+    }
+  };
+  //---
+
+  const handelToggleFromCart = async (productId: number, quantity: number) => {
+    if (!currentUser) {
+      showToast("auth", "cart");
+      return;
+    }
+
+    if (quantity < 1 || quantity > 10) {
+      return;
+    }
+
+    try {
+      const res = await toggleFromCartApi(productId, quantity);
+      if (!res.success) {
+        store.actions.setError(res.error);
+        showToast("error", "cart", res.message || "Failed add to cart");
+        return;
+      }
+      showToast("add", "cart");
+      store.actions.updateQuantity(productId, quantity);
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
+      showToast("error", "cart", errorMessage || "Failed to change cart");
+      store.actions.setError(errorMessage || "Error add to cart");
+    }
+  };
 
   //----
   const totalPrice = store.items.reduce((sum, item) => {
@@ -96,5 +151,7 @@ export const useCart = () => {
     loadCart,
     totalPrices,
     cartCount,
+    handelRemoveCart,
+    handelToggleFromCart,
   };
 };

@@ -16,6 +16,16 @@ export const useCartStore = create<CartStore>()(
 
       actions: {
         setCart: (items) => set({ items }),
+        removeCart: (productId) =>
+          set((state) => ({
+            items: state.items.filter((item) => item.id !== productId),
+          })),
+        updateQuantity: (productId, quantity) =>
+          set((state) => ({
+            items: state.items.map((item) =>
+              item.id === productId ? { ...item, quantity } : item,
+            ),
+          })),
         clearCart: () => set({ items: [] }),
         setStatus: (status) => set({ status }),
         setError: (error) => set({ error }),

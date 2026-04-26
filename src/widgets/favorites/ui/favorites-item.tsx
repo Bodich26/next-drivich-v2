@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PriceProduct } from "@/entities/product";
 import { RemoveFavoriteBtn } from "@/features/favorite";
-import { FavoriteProduct } from "@/features/favorite/model/favorite-type";
+import { FavoriteProduct } from "@/features/favorite";
 import { BadgeSales, DecorLine } from "@/shared";
 import { PUBLIC_ROUTES } from "@/../routes";
 import { AddToCartBtn } from "@/features/cart";

@@ -1,6 +1,8 @@
 import { CartItemProps } from "../model/cart-type";
-import { Button, PriceFormat } from "@/shared";
+import { PriceFormat } from "@/shared";
 import Image from "next/image";
+import { RemoveFromCartBtn } from "./remove-from-cart-btn";
+import { ToggleQuantityBtn } from "./toggle-quantity-btn";
 
 export const CartItem = ({
   id,
@@ -32,32 +34,10 @@ export const CartItem = ({
             style={{ backgroundColor: color }}
           />
         </div>
-        <div className="flex items-center gap-3 mt-4">
-          <Button
-            variant={"secondary"}
-            onClick={() => console.log(id)}
-            className="px-3 py-1 border rounded-md cursor-pointer"
-          >
-            -
-          </Button>
-          <span>{quantity}</span>
-          <Button
-            variant={"secondary"}
-            onClick={() => console.log(id)}
-            className="px-3 py-1 border rounded-md cursor-pointer"
-          >
-            +
-          </Button>
-        </div>
+        <ToggleQuantityBtn productId={id} quantity={quantity} />
       </div>
       <div className="flex flex-col justify-between items-end">
-        <Button
-          variant={"destructive"}
-          onClick={() => console.log(id)}
-          className="cursor-pointer"
-        >
-          Remove
-        </Button>
+        <RemoveFromCartBtn productId={id} />
         <div className="text-right">
           <div className="text-xs text-gray-400">Total</div>
           <div className="font-semibold text-lg">

@@ -1,6 +1,5 @@
-import { apiClientQs } from "@/shared";
+import { apiClientQs, ProductFilters } from "@/shared";
 import { API_ROUTES } from "@/../routes";
-import { ProductFilters } from "../model/products-type";
 import axios from "axios";
 
 export async function getProductsApi(

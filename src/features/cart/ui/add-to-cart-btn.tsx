@@ -28,7 +28,7 @@ export const AddToCartBtn = ({
         size="lg"
         onClick={() => handleAddToCart(productId)}
       >
-        {wasCart ? "In Cart" : "Add to Cart"}
+        {wasCart ? "Added" : "Add to cart"}
       </Button>
     ),
     icon: (
@@ -37,7 +37,7 @@ export const AddToCartBtn = ({
         onClick={() => handleAddToCart(productId)}
         disabled={wasCart}
         className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-xl transition",
+          "flex items-center gap-2 px-2 py-2 rounded-md transition cursor-pointer",
           wasCart ? "bg-green-100 text-green-600" : "",
         )}
       >

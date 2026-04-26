@@ -1,14 +1,6 @@
 "use client";
 import { Checkbox } from "@/shared";
-import React from "react";
-
-export type FilterCheckboxProps = {
-  text: string;
-  value: string;
-  endAdornment?: React.ReactNode;
-  onCheckedChange?: (checked: boolean) => void;
-  checked?: boolean;
-};
+import { FilterCheckboxProps } from "../model/filters-type";
 
 export const FilterCheckbox = ({
   text,
