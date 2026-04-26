@@ -1,7 +1,6 @@
 import { productsStore } from "./products-store";
 import { getProductsApi } from "../api/get-products-api";
-import { getErrorMessage } from "@/shared";
-import { ProductFilters } from "./products-type";
+import { getErrorMessage, ProductFilters } from "@/shared";
 
 export const useProducts = () => {
   const store = productsStore();

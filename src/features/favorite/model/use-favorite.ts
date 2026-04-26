@@ -1,7 +1,7 @@
 import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
 import { useFavoriteStore } from "./use-favorite-store";
 import { getFavoriteProductsApi } from "../api/get-favorite-products-api";
-import { removeFavoriteProductApi } from "../api/remove-favorite-product-api";
+import { deleteFavoriteProductApi } from "../api/delete-favorite-product-api";
 import { addFavoriteProductApi } from "../api/add-favorite-product-api";
 
 export const useFavorites = () => {
@@ -22,7 +22,7 @@ export const useFavorites = () => {
     const wasFavorite = isFavorite(productId);
     try {
       if (wasFavorite) {
-        const res = await removeFavoriteProductApi(productId);
+        const res = await deleteFavoriteProductApi(productId);
         if (!res.success) {
           showToast(
             "error",
@@ -72,7 +72,7 @@ export const useFavorites = () => {
     store.actions.removeFavorite(productId);
 
     try {
-      const res = await removeFavoriteProductApi(productId);
+      const res = await deleteFavoriteProductApi(productId);
       if (!res.success) {
         store.actions.setError(res.error);
         showToast(

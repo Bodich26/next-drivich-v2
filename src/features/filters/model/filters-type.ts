@@ -1,4 +1,5 @@
-import { ProductFilters, SortProducts } from "@/entities/product";
+import { ProductFilters, SortProducts } from "@/shared";
+
 export interface FilterActions {
   setSearchModel: (value: string) => void;
   setPriceRange: (min?: number, max?: number) => void;
@@ -28,3 +29,21 @@ export interface DisplayFilterActions {
 export interface DisplayFilterStore extends DisplayFilterState {
   actions: DisplayFilterActions;
 }
+
+export type FilterCheckboxProps = {
+  text: string;
+  value: string;
+  endAdornment?: React.ReactNode;
+  onCheckedChange?: (checked: boolean) => void;
+  checked?: boolean;
+};
+
+export type FilterSliderProps = {
+  className?: string;
+  min: number;
+  max: number;
+  step: number;
+  formatLabel?: (value: number) => string;
+  value?: [number, number];
+  onValueChange?: (values: [number, number]) => void;
+};

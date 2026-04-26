@@ -1,11 +1,11 @@
+import axios from "axios";
 import { apiClient } from "@/shared";
 import { API_ROUTES } from "@/../routes";
-import axios from "axios";
 
-export async function removeFavoriteProductApi(productId: number) {
-  const FAVORITES_URL = `${API_ROUTES.FAVORITES}`;
+export const deleteFromCartApi = async (productId: number) => {
+  const CART_URL = `${API_ROUTES.CART}`;
   try {
-    const res = await apiClient.delete(FAVORITES_URL, {
+    const res = await apiClient.delete(CART_URL, {
       data: { productId },
     });
     return res.data;
@@ -16,4 +16,4 @@ export async function removeFavoriteProductApi(productId: number) {
 
     throw new Error("Unknown error");
   }
-}
+};

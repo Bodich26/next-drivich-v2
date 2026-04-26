@@ -66,7 +66,7 @@ export const ProductSidebar = ({ price, discount, color, id }: Props) => {
           <PriceProduct view="main" price={price} discount={discount} />
 
           <div className="mt-8 space-y-3">
-            <AddToCartBtn variant="icon" productId={id} />
+            <AddToCartBtn variant="button" productId={id} />
           </div>
         </div>
       </div>

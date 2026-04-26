@@ -1,4 +1,4 @@
-import { Asides, cn, DecorLine, Field, FieldLabel, Input } from "@/shared";
+import { Asides, DecorLine, Field, FieldLabel, Input } from "@/shared";
 import { useChangeFilters } from "../model/use-change-filters";
 import { useDisplayFilterStore } from "../model/use-display-filter-store";
 import { RangeSlider } from "./range-slider";

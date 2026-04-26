@@ -1,22 +1,20 @@
 "use client";
-
 import React from "react";
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import { cn } from "@/shared";
-
-type SliderProps = {
-  className?: string;
-  min: number;
-  max: number;
-  step: number;
-  formatLabel?: (value: number) => string;
-  value?: [number, number];
-  onValueChange?: (values: [number, number]) => void;
-};
+import { FilterSliderProps } from "../model/filters-type";
 
 const RangeSlider = React.forwardRef(
   (
-    { className, min, max, step, value, onValueChange, ...props }: SliderProps,
+    {
+      className,
+      min,
+      max,
+      step,
+      value,
+      onValueChange,
+      ...props
+    }: FilterSliderProps,
     ref,
   ) => {
     const initialValue = Array.isArray(value) ? value : [min, max];
