@@ -1,4 +1,4 @@
-import { SortProducts } from "@/entities/product";
+import { SortProducts } from "@/shared";
 import { useFiltersStore } from "./use-filters-store";
 
 export const useChangeFilters = () => {

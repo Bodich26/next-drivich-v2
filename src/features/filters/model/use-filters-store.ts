@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { FiltersStore } from "./filters-type";
-import { ProductFilters, SortProducts } from "@/entities/product";
-
+import { ProductFilters, SortProducts } from "@/shared";
 const defaultFilters: ProductFilters = {
   searchModel: "",
   priceMin: undefined,
