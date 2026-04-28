@@ -1,12 +1,11 @@
+"use client";
 import { Asides, DecorLine, Field, FieldLabel, Input } from "@/shared";
 import { useChangeFilters } from "../model/use-change-filters";
-import { useDisplayFilterStore } from "../model/use-display-filter-store";
 import { RangeSlider } from "./range-slider";
 import { ResetFiltersBtn } from "./reset-filters-btn";
 import { CheckboxGroup } from "./checkbox-group";
 
 export const FiltersList = () => {
-  const { isOpen, actions } = useDisplayFilterStore();
   const {
     handleSearchModel,
     searchModel,
@@ -21,7 +20,7 @@ export const FiltersList = () => {
   } = useChangeFilters();
 
   return (
-    <Asides isOpen={isOpen} toggle={actions.toggle}>
+    <Asides id={"filters"}>
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Product Filtration</h1>
         {hasChanges && <ResetFiltersBtn />}

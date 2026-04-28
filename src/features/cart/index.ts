@@ -5,3 +5,4 @@ export { CartItem } from "./ui/cart-item";
 export { CartSkeletonSummary } from "./ui/cart-skeleton-summary";
 export { CartSkeletonItem } from "./ui/cart-skeleton-item";
 export type { ProductInCart } from "./model/cart-type";
+export { ToggleSummaryBtn } from "./ui/toggle-summary-btn";

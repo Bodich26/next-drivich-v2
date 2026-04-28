@@ -3,6 +3,8 @@ import { PriceFormat } from "@/shared";
 import Image from "next/image";
 import { RemoveFromCartBtn } from "./remove-from-cart-btn";
 import { ToggleQuantityBtn } from "./toggle-quantity-btn";
+import Link from "next/link";
+import { PUBLIC_ROUTES } from "@/../routes";
 
 export const CartItem = ({
   id,
@@ -23,7 +25,12 @@ export const CartItem = ({
         />
       </div>
       <div className="flex flex-col flex-1">
-        <h2 className="font-semibold text-lg capitalize">{model}</h2>
+        <Link
+          href={`${PUBLIC_ROUTES.PRODUCT}/${id}`}
+          className="font-semibold text-lg capitalize"
+        >
+          {model}
+        </Link>
         <div className="text-gray-500 text-sm">
           <PriceFormat price={price} /> / per item
         </div>
