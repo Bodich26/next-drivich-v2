@@ -1,17 +1,23 @@
+"use client";
+import { useSidebar } from "../hooks";
 import { cn } from "../lib";
+import { SidebarType } from "../types/sidebar-type";
 
 type Props = {
+  id: SidebarType;
   children: React.ReactNode;
-  isOpen: boolean;
-  toggle: () => void;
 };
-export const Asides = ({ children, isOpen, toggle }: Props) => {
+
+export const Asides = ({ children, id }: Props) => {
+  const active = useSidebar((s) => s.active);
+  const toggle = useSidebar((s) => s.toggle);
+
   return (
     <>
-      {isOpen && (
+      {active && (
         <div
           className="fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0"
-          onClick={toggle}
+          onClick={() => toggle(id)}
         />
       )}
       <aside
@@ -29,7 +35,7 @@ export const Asides = ({ children, isOpen, toggle }: Props) => {
 
           // АНИМАЦИЯ
           "transition-transform duration-300",
-          isOpen
+          active
             ? "max-[930px]:translate-x-0"
             : "max-[930px]:-translate-x-full",
         )}

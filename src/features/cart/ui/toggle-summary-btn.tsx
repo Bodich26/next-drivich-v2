@@ -1,16 +1,16 @@
 import { Button, useSidebar } from "@/shared";
-import { Filter } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 
-export const ToggleFilterBtn = () => {
+export const ToggleSummaryBtn = () => {
   const { toggle } = useSidebar();
   return (
     <Button
       className="font-medium text-base cursor-pointer hidden max-[930px]:block"
       size="default"
       variant={"outline"}
-      onClick={() => toggle("filters")}
+      onClick={() => toggle("cart")}
     >
-      <Filter />
+      <ShoppingCart />
     </Button>
   );
 };

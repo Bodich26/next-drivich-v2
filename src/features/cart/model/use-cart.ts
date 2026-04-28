@@ -139,7 +139,10 @@ export const useCart = () => {
     ? `$${totalPrice.toLocaleString("en-US")}`
     : "$ 0";
 
-  const cartCount = store.items.length;
+  const totalCountCart = store.items.reduce(
+    (sum, item) => sum + item.quantity,
+    0,
+  );
 
   return {
     cartItems: store.items,
@@ -150,7 +153,7 @@ export const useCart = () => {
     isCart,
     loadCart,
     totalPrices,
-    cartCount,
+    totalCountCart,
     handelRemoveCart,
     handelToggleFromCart,
   };

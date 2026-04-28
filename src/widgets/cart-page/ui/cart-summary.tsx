@@ -1,14 +1,14 @@
+"use client";
 import { Asides, Button } from "@/shared";
 
 type Props = {
-  isOpen: boolean;
   totalPrice: number | string;
   cartLength: number;
 };
 
-export const CartSummary = ({ isOpen, totalPrice, cartLength }: Props) => {
+export const CartSummary = ({ totalPrice, cartLength }: Props) => {
   return (
-    <Asides isOpen={isOpen} toggle={() => console.log()}>
+    <Asides id={"cart"}>
       <div className="flex justify-between flex-col h-full">
         <div>
           <h3 className="text-xl font-semibold mb-2">Summary</h3>

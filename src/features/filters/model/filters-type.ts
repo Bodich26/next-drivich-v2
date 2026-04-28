@@ -15,21 +15,6 @@ export interface FiltersStore extends ProductFilters {
   actions: FilterActions;
 }
 
-//---------
-
-export interface DisplayFilterState {
-  isOpen: boolean;
-}
-export interface DisplayFilterActions {
-  open: () => void;
-  close: () => void;
-  toggle: () => void;
-}
-
-export interface DisplayFilterStore extends DisplayFilterState {
-  actions: DisplayFilterActions;
-}
-
 export type FilterCheckboxProps = {
   text: string;
   value: string;

@@ -1,5 +1,5 @@
 "use client";
-import { cn, Container, DisplayError, EmptyState } from "@/shared";
+import { cn, Container, DisplayError, EmptyState, Skeleton } from "@/shared";
 import { ProductItem } from "@/entities/product";
 import { CatalogSorted } from "./catalog-sorted";
 import { ToggleFavoriteBtn } from "@/features/favorite";
@@ -16,7 +16,11 @@ export const CatalogList = () => {
       <section className="flex justify-between gap-8 flex-1 relative">
         <FiltersList />
         <div className="flex-1 min-w-0">
-          <CatalogSorted productsLength={productsLength} />
+          {status === "idle" || status === "loading" ? (
+            <Skeleton className="w-full h-8 mb-6 mt-2" />
+          ) : (
+            <CatalogSorted productsLength={productsLength} />
+          )}
           {status === "idle" || status === "loading" ? (
             <CatalogListSkeleton />
           ) : error ? (
