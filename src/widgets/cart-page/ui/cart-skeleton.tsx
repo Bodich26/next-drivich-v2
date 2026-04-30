@@ -3,8 +3,8 @@ import { Skeleton, SkeletonList } from "@/shared";
 
 export const CartSkeleton = () => {
   return (
-    <div className="flex flex-col gap-6">
-      <Skeleton className="w-[120px] h-8" />
+    <div className="flex flex-col">
+      <Skeleton className="w-[120px] h-9 mb-4" />
 
       <div className="flex gap-8">
         {/* LEFT */}

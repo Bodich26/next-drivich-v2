@@ -31,7 +31,7 @@ export const UserDropdown = () => {
           <Link href={`${PUBLIC_ROUTES.PROFILE}`}>Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <LogoutButton />
+          <LogoutButton variant="icon" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
