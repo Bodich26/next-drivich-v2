@@ -13,7 +13,6 @@ export default auth((req) => {
   const isAdminRoute = nextUrl.pathname.startsWith(PUBLIC_ROUTES.ADMIN);
 
   const protectedRoutes = [
-    `${PUBLIC_ROUTES.PRODUCT}`,
     `${PUBLIC_ROUTES.PROFILE}`,
     `${PUBLIC_ROUTES.CART}`,
     `${PUBLIC_ROUTES.ADMIN}`,
@@ -44,11 +43,5 @@ export default auth((req) => {
   return NextResponse.next();
 });
 export const config = {
-  matcher: [
-    "/auth",
-    "/:path*",
-    "/profile/:path*",
-    "/product/:path*",
-    "/admin/:path*",
-  ],
+  matcher: ["/auth", "/:path*", "/profile/:path*", "/admin/:path*"],
 };

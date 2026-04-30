@@ -1,3 +1,4 @@
+import { LogoutButton } from "@/features/auth";
 import { Asides, Button } from "@/shared";
 
 type Props = {
@@ -34,14 +35,7 @@ export const ProfileOrderInfo = ({ totalSpent, totalOrders }: Props) => {
           <Button className="w-full mt-5 cursor-pointer" size={"lg"}>
             Edit profile
           </Button>
-
-          <Button
-            className="w-full cursor-pointer"
-            size={"lg"}
-            variant={"outline"}
-          >
-            Logout
-          </Button>
+          <LogoutButton variant="ghost" />
         </div>
       </div>
     </Asides>

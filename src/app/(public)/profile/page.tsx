@@ -52,7 +52,7 @@ export default function ProfilePage() {
           </div>
           <div className="flex gap-8">
             <div className="flex flex-col gap-6 flex-1">
-              <ProfileHeader userName={"sdfsdfsd"} userEmail={"fsdfsdf"} />
+              <ProfileHeader />
               {mockOrders.length === 0 ? (
                 <EmptyState
                   desc={"Start shopping to see your orders here."}
