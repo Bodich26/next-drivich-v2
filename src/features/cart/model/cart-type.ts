@@ -29,5 +29,5 @@ export interface CartStore extends CartState {
 
 export type CartItemProps = Pick<
   ProductInCart,
-  "id" | "imageSrc" | "model" | "price" | "color" | "quantity"
+  "id" | "imageSrc" | "model" | "price" | "color" | "quantity" | "discount"
 >;

@@ -1,4 +1,4 @@
-import { OrderUI } from "@/entities/order/model/order-type";
+import { getOrdersApi } from "@/entities/order";
 import { UserInfoBtn } from "@/entities/user";
 import { Container, EmptyState } from "@/shared";
 import {
@@ -6,42 +6,9 @@ import {
   ProfileOrderInfo,
   ProfileOrderList,
 } from "@/widgets/profile-page";
-import { OrderStatus } from "@prisma/client";
 
-const mockOrders: OrderUI[] = [
-  {
-    id: 1001,
-    status: OrderStatus.PAID,
-    createdAt: new Date(),
-
-    firstName: "Bogdan",
-    lastName: "Ivanov",
-    phoneNumber: "380123456789",
-    country: "Ukraine",
-    city: "Kyiv",
-    address: "Main street 12",
-    payment: "Card",
-
-    totalPrice: 1200,
-
-    orderItems: [
-      {
-        id: 1,
-        productId: 1,
-        price: 1200,
-        quantity: 1,
-
-        product: {
-          id: 1,
-          model: "911 Turbo",
-          imageSrc: "https://imgur.com/RFHxOwJ.png",
-        },
-      },
-    ],
-  },
-];
-
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const ordersData = await getOrdersApi();
   return (
     <Container>
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -53,14 +20,14 @@ export default function ProfilePage() {
           <div className="flex gap-8">
             <div className="flex flex-col gap-6 flex-1">
               <ProfileHeader />
-              {mockOrders.length === 0 ? (
+              {!ordersData || ordersData.length === 0 ? (
                 <EmptyState
                   desc={"Start shopping to see your orders here."}
                   title="No orders yet"
                   icon="📦"
                 />
               ) : (
-                <ProfileOrderList myOrders={mockOrders} />
+                <ProfileOrderList myOrders={ordersData} />
               )}
             </div>
             <ProfileOrderInfo totalSpent={4324} totalOrders={4} />

@@ -11,3 +11,7 @@ export type ApiError = {
 };
 
 export type ApiResponse<T> = ApiSuccess<T> | ApiError;
+
+export type ActionResult =
+  | { success: true; message: string }
+  | { success: false; error: string };

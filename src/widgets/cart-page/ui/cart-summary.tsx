@@ -1,5 +1,5 @@
-"use client";
-import { Asides, Button } from "@/shared";
+import { CheckoutAlertDialog } from "@/features/checkout";
+import { Asides } from "@/shared";
 
 type Props = {
   totalPrice: number | string;
@@ -34,9 +34,7 @@ export const CartSummary = ({ totalPrice, cartLength }: Props) => {
           </div>
         </div>
         <div>
-          <Button className="w-full mt-5 cursor-pointer" size={"lg"}>
-            Proceed to Checkout
-          </Button>
+          <CheckoutAlertDialog />
           <div className="text-xs text-gray-400 mt-3 text-center">
             Secure checkout • 256-bit SSL
           </div>

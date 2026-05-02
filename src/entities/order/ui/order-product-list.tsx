@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PriceFormat } from "@/shared";
-import { OrderListProductsProps } from "../model/order-type";
+import { OrderItemUI } from "../model/order-type";
 import { PUBLIC_ROUTES } from "@/../routes";
 
-export const OrderProductList = ({ orderProducts }: OrderListProductsProps) => {
+type Props = {
+  orderProducts: OrderItemUI[];
+};
+
+export const OrderProductList = ({ orderProducts }: Props) => {
   return (
     <div className="flex flex-col gap-3 h-[140px] overflow-y-auto pr-2">
       {orderProducts.map((item) => (
@@ -23,19 +27,19 @@ export const OrderProductList = ({ orderProducts }: OrderListProductsProps) => {
           <div className="flex flex-col flex-1">
             <Link
               href={`${PUBLIC_ROUTES.PRODUCT}/${item.productId}`}
-              className="font-medium hover:underline"
+              className="font-medium capitalize hover:underline"
             >
               {item.product.model}
             </Link>
 
             <div className="text-sm text-gray-500">
-              ${item.price} × {item.quantity}
+              <PriceFormat price={item.price} /> × {item.quantity}
             </div>
           </div>
 
           {/* TOTAL */}
           <div className="font-semibold text-sm">
-            <PriceFormat price={item.price * item.quantity} />
+            <PriceFormat price={item.price} />
           </div>
         </div>
       ))}

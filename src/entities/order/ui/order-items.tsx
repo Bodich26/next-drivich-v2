@@ -9,10 +9,18 @@ import {
 import { OrderInfoItem } from "./order-item-info";
 import { OrderProductList } from "./order-product-list";
 import { getOrderStatus } from "../model/get-order-status";
-import { OrderItemProps } from "../model/order-type";
+import { OrderUI } from "../model/order-type";
 
-export const OrderItems = ({ order }: OrderItemProps) => {
+type Props = {
+  order: OrderUI;
+};
+
+export const OrderItems = ({ order }: Props) => {
   const { color, label } = getOrderStatus(order.status);
+  const createdDate = new Date(order.createdAt);
+  const totalItemsInThisOrder = order.orderItems.reduce((sum, item) => {
+    return sum + (item.quantity || 0);
+  }, 0);
 
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -26,7 +34,7 @@ export const OrderItems = ({ order }: OrderItemProps) => {
             <div className="flex flex-col text-left">
               <span className="font-semibold text-lg">Order #{order.id}</span>
               <span className="text-sm text-gray-500">
-                {order.createdAt.toLocaleDateString()}
+                {createdDate.toLocaleDateString()}
               </span>
             </div>
 
@@ -69,7 +77,7 @@ export const OrderItems = ({ order }: OrderItemProps) => {
                   </b>
                 </span>
                 <span className="text-gray-500">
-                  {order.orderItems.length} items
+                  {totalItemsInThisOrder} items
                 </span>
               </div>
 

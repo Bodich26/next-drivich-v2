@@ -4,7 +4,8 @@ import { Container, EmptyState, DisplayError } from "@/shared";
 import { CartList, CartSkeleton, CartSummary } from "@/widgets/cart-page";
 
 export default function CartPage() {
-  const { status, cartItems, totalCountCart, totalPrices, error } = useCart();
+  const { status, cartItems, totalCountCart, totalPricesFormat, error } =
+    useCart();
 
   return (
     <Container>
@@ -36,7 +37,7 @@ export default function CartPage() {
               <div className="flex gap-8">
                 <CartList cart={cartItems} />
                 <CartSummary
-                  totalPrice={totalPrices}
+                  totalPrice={totalPricesFormat}
                   cartLength={totalCountCart}
                 />
               </div>
