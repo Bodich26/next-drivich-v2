@@ -33,7 +33,7 @@ export const OrderProductList = ({ orderProducts }: Props) => {
             </Link>
 
             <div className="text-sm text-gray-500">
-              <PriceFormat price={item.price} /> × {item.quantity}
+              <PriceFormat price={item.price} /> = {item.quantity} item(-s)
             </div>
           </div>
 

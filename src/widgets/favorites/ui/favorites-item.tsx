@@ -13,7 +13,7 @@ export const FavoriteItem = ({ product }: { product: FavoriteProduct }) => {
       {/* IMAGE BLOCK */}
       <div className="relative w-full aspect-[4/2]">
         <RemoveFavoriteBtn productId={product.id} />
-        <BadgeSales discount={product.discount} />
+        <BadgeSales discount={product.discount} variant="item" />
         <Image
           src={product.imageSrc}
           alt={product.model}
