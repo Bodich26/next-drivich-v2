@@ -17,7 +17,7 @@ export const ProductItem = ({ product, favoriteSlot, cartSlot }: Props) => {
     <div className="group relative flex flex-col h-full rounded-md overflow-hidden bg-card shadow-sm">
       {/* IMAGE BLOCK */}
       <div className="relative w-full aspect-[4/2]">
-        <BadgeSales discount={product.discount} />
+        <BadgeSales discount={product.discount} variant="item" />
         {favoriteSlot}
         <Image
           src={product.imageSrc}

@@ -125,7 +125,6 @@ export const useCart = () => {
         showToast("error", "cart", res.message || "Failed add to cart");
         return;
       }
-      showToast("add", "cart");
       store.actions.updateQuantity(productId, quantity);
     } catch (err: unknown) {
       const errorMessage = getErrorMessage(err);

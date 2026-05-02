@@ -9,17 +9,22 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  useCurrentUser,
 } from "@/shared";
 import { LucideUser } from "lucide-react";
 import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/../routes";
 
 export const UserDropdown = () => {
+  const currenUser = useCurrentUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage
+            src={currenUser?.image || "https://github.com/shadcn.png"}
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

@@ -1,7 +1,7 @@
 import { PriceProduct } from "@/entities/product";
 import { AddToCartBtn } from "@/features/cart";
 import { ToggleFavoriteBtn } from "@/features/favorite";
-import { DecorLine } from "@/shared";
+import { BadgeSales, DecorLine } from "@/shared";
 import { Product } from "@prisma/client";
 import { Star } from "lucide-react";
 
@@ -60,8 +60,8 @@ export const ProductSidebar = ({ price, discount, color, id }: Props) => {
 
         {/* Purchase Section */}
         <div className="pt-6">
-          <span className="text-sm text-muted-foreground mb-1">
-            Price {discount ? " - SALE" : ""}
+          <span className="text-base">
+            Price <BadgeSales discount={discount} variant="page" />
           </span>
           <PriceProduct view="main" price={price} discount={discount} />
 

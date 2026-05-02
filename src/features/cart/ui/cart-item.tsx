@@ -1,5 +1,5 @@
 import { CartItemProps } from "../model/cart-type";
-import { calculateItemTotal } from "@/shared";
+import { BadgeSales, calculateItemTotal } from "@/shared";
 import Image from "next/image";
 import { RemoveFromCartBtn } from "./remove-from-cart-btn";
 import { ToggleQuantityBtn } from "./toggle-quantity-btn";
@@ -30,12 +30,15 @@ export const CartItem = ({
         />
       </div>
       <div className="flex flex-col flex-1">
-        <Link
-          href={`${PUBLIC_ROUTES.PRODUCT}/${id}`}
-          className="font-semibold text-lg capitalize"
-        >
-          {model}
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href={`${PUBLIC_ROUTES.PRODUCT}/${id}`}
+            className="font-semibold text-lg capitalize"
+          >
+            {model}
+          </Link>
+          <BadgeSales discount={discount} variant="cart" />
+        </div>
         <div className="text-gray-500 text-sm">
           <PriceProduct price={price} discount={discount} view="cart" />
         </div>
