@@ -6,7 +6,7 @@ import { PUBLIC_ROUTES } from "@/../routes";
 import { useCart } from "../model/use-cart";
 
 export const CartBtn = () => {
-  const { status, error, totalPrices, totalCountCart } = useCart();
+  const { status, error, totalPricesFormat, totalCountCart } = useCart();
   return (
     <Link href={PUBLIC_ROUTES.CART}>
       <Button className="font-medium text-base cursor-pointer" size={"lg"}>
@@ -16,7 +16,7 @@ export const CartBtn = () => {
           ""
         ) : (
           <>
-            {totalPrices}
+            {totalPricesFormat}
             <span className="block w-[1px] h-[20px] rounded-md bg-primary-foreground mt-1 mb-1"></span>
           </>
         )}

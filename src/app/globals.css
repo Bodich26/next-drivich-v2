@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "react-phone-input-2/lib/style.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -66,6 +67,76 @@ body {
     color-mix(in srgb, var(--product-gradient-from) 65%, transparent) 70%,
     var(--product-gradient-to) 100%
   );
+}
+
+.react-tel-input {
+  width: 100% !important;
+}
+
+/* Основное поле ввода */
+.react-tel-input .form-control {
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  height: 40px !important;
+  width: 100% !important;
+  padding-left: 52px !important; /* отступ для флага */
+}
+
+/* Контейнер флага */
+.react-tel-input .flag-dropdown {
+  background-color: var(--input) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  height: 40px !important;
+}
+
+/* Выбранный флаг */
+.react-tel-input .selected-flag {
+  background-color: transparent !important;
+  border-radius: var(--radius) 0 0 var(--radius) !important;
+}
+
+/* Dropdown со списком стран */
+.react-tel-input .country-list {
+  background-color: var(--popover) !important;
+  color: var(--popover-foreground) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+  z-index: 9999 !important;
+}
+
+/* Элемент страны в выпадающем списке */
+.react-tel-input .country {
+  padding: 8px 10px !important;
+}
+
+.react-tel-input .country:hover {
+  background-color: var(--accent) !important;
+}
+
+.react-tel-input .country.highlight {
+  background-color: var(--accent) !important;
+}
+
+/* Поле поиска внутри dropdown */
+.react-tel-input .search-box {
+  background-color: var(--input) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  margin: 8px !important;
+  border-radius: var(--radius) !important;
+}
+
+/* Темная тема — дополнительные корректировки */
+.dark .react-tel-input .form-control,
+.dark .react-tel-input .flag-dropdown {
+  background-color: var(--input) !important;
+}
+
+.dark .react-tel-input .country-list {
+  background-color: var(--popover) !important;
 }
 
 :root {

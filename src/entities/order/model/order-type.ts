@@ -1,23 +1,21 @@
 import { Order, OrderItem, Product } from "@prisma/client";
 
-// --- Product ---
-type ProductPreview = Pick<Product, "id" | "model" | "imageSrc">;
+export type ProductPreview = Pick<
+  Product,
+  "id" | "brand" | "model" | "imageSrc" | "price" | "discount"
+>;
 
-// --- OrderItem ---
-type OrderItemUI = Pick<
+export type OrderItemUI = Pick<
   OrderItem,
-  "id" | "productId" | "price" | "quantity"
+  "id" | "productId" | "quantity" | "price"
 > & {
   product: ProductPreview;
 };
 
-// --- Order ---
-type OrderUI = Pick<
+export type OrderUI = Pick<
   Order,
   | "id"
-  | "status"
-  | "createdAt"
-  | "totalPrice"
+  | "userId"
   | "firstName"
   | "lastName"
   | "phoneNumber"
@@ -25,27 +23,11 @@ type OrderUI = Pick<
   | "city"
   | "address"
   | "payment"
+  | "status"
+  | "totalPrice"
+  | "createdAt"
+  | "updatedAt"
+  | "completedAt"
 > & {
   orderItems: OrderItemUI[];
-};
-
-// --- Props ---
-type OrderProps = {
-  orders: OrderUI[];
-};
-
-type OrderItemProps = {
-  order: OrderUI;
-};
-
-type OrderListProductsProps = {
-  orderProducts: OrderItemUI[];
-};
-
-export type {
-  OrderUI,
-  OrderProps,
-  OrderItemUI,
-  OrderItemProps,
-  OrderListProductsProps,
 };

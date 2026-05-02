@@ -28,3 +28,4 @@ export * from "./show-errors";
 export * from "./asides";
 export * from "./empty-state";
 export * from "./skeleton-list";
+export * from "./alert-dialog";

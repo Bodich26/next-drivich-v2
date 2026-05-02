@@ -40,9 +40,9 @@ export const PriceProduct = ({ price, discount, view }: PriceProductProps) => {
     ),
 
     cart: (
-      <div className="flex flex-col relative">
+      <div className="flex text-base gap-1.5 relative">
         <span>{currentPrice}</span>
-        {oldPrice && <span className="absolute -top-5">{oldPrice}</span>}
+        {oldPrice && <span>{oldPrice}</span>}
       </div>
     ),
 

@@ -1,10 +1,11 @@
 import { CartItemProps } from "../model/cart-type";
-import { PriceFormat } from "@/shared";
+import { calculateItemTotal } from "@/shared";
 import Image from "next/image";
 import { RemoveFromCartBtn } from "./remove-from-cart-btn";
 import { ToggleQuantityBtn } from "./toggle-quantity-btn";
 import Link from "next/link";
 import { PUBLIC_ROUTES } from "@/../routes";
+import { PriceProduct } from "@/entities/product";
 
 export const CartItem = ({
   id,
@@ -13,7 +14,11 @@ export const CartItem = ({
   price,
   color,
   quantity,
+  discount,
 }: CartItemProps) => {
+  const itemTotal = calculateItemTotal(price, discount, quantity);
+  const itemTotalFormatted = `$${itemTotal.toLocaleString("en-US")}`;
+
   return (
     <div className="flex gap-4 bg-card border border-border rounded-md p-4 shadow-sm">
       <div className="w-40 h-28 relative shrink-0">
@@ -32,7 +37,7 @@ export const CartItem = ({
           {model}
         </Link>
         <div className="text-gray-500 text-sm">
-          <PriceFormat price={price} /> / per item
+          <PriceProduct price={price} discount={discount} view="cart" />
         </div>
         <div className="flex items-center gap-2 mt-2">
           <span className="text-sm text-gray-500">Color:</span>
@@ -47,9 +52,7 @@ export const CartItem = ({
         <RemoveFromCartBtn productId={id} />
         <div className="text-right">
           <div className="text-xs text-gray-400">Total</div>
-          <div className="font-semibold text-lg">
-            <PriceFormat price={price * quantity} />
-          </div>
+          <div className="font-semibold text-lg">{itemTotalFormatted}</div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ export const SuccessForm = ({ message }: Props) => {
   }
 
   return (
-    <div className="pt-1 rounded-lg flex  items-center gap-x-2 text-sm text-primary">
+    <div className="pt-1 rounded-lg flex items-center gap-x-2 text-sm text-green-600">
       <CircleCheck className="h-4 w-4" />
       <p>{message}</p>
     </div>

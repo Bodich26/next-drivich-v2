@@ -1,4 +1,9 @@
-import { getErrorMessage, showToast, useCurrentUser } from "@/shared";
+import {
+  calculateTotalPrice,
+  getErrorMessage,
+  showToast,
+  useCurrentUser,
+} from "@/shared";
 import { useCartStore } from "./use-cart-store";
 import { getCartApi } from "../api/get-cart-api";
 import { addToCartApi } from "../api/add-to-cart-api";
@@ -129,13 +134,16 @@ export const useCart = () => {
     }
   };
 
-  //----
-  const totalPrice = store.items.reduce((sum, item) => {
-    const discountedPrice = item.price * (1 - (item.discount || 0) / 100);
-    return sum + discountedPrice * item.quantity!;
-  }, 0);
+  //---
+  const totalPrice = calculateTotalPrice(
+    store.items.map((item) => ({
+      price: item.price,
+      discount: item.discount,
+      quantity: item.quantity || 1,
+    })),
+  );
 
-  const totalPrices = totalPrice
+  const totalPricesFormat = totalPrice
     ? `$${totalPrice.toLocaleString("en-US")}`
     : "$ 0";
 
@@ -150,9 +158,10 @@ export const useCart = () => {
     error: store.error,
     message: store.message,
     handleAddToCart,
+    clearCart: store.actions.clearCart,
     isCart,
     loadCart,
-    totalPrices,
+    totalPricesFormat,
     totalCountCart,
     handelRemoveCart,
     handelToggleFromCart,

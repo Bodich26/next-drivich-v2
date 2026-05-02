@@ -15,6 +15,7 @@ export const CartList = ({ cart }: Props) => {
           imageSrc={item.imageSrc}
           quantity={item.quantity}
           color={item.color}
+          discount={item.discount}
         />
       ))}
     </div>
